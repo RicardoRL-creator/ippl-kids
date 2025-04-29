@@ -84,10 +84,10 @@
   margin-bottom: 10px;
 }
 
+/* Adicionei estilos para alinhar os botões 'Voltar' e 'Buscar' */
 .button-container {
   display: flex;
-  justify-content: center;
-  margin-top: 10px;
+  justify-content: space-between;
 }
 
 .register-button {
@@ -145,4 +145,11 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+}
+
+/* Alinhar o retorno da busca à esquerda */
+.patient-info,
+.patient-options,
+.not-found {
+  text-align: left;
 }

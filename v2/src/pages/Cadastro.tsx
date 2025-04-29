@@ -5,23 +5,61 @@ import './Register.css';
 
 // Este componente permite cadastrar novos pacientes, gerenciando estados e formulários.
 const Cadastro = () => {
-  // Estado para armazenar os valores do formulário de cadastro
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
   const [dataNascimento, setDataNascimento] = useState('');
-
-  // Hook para navegação entre páginas
+  const [sexo, setSexo] = useState('');
+  const [localNascimentoCidade, setLocalNascimentoCidade] = useState('');
+  const [localNascimentoEstado, setLocalNascimentoEstado] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+
+  // Função para validar CPF
+  const isValidCPF = (cpf: string) => {
+    return /^\d{11}$/.test(cpf); // Verifica se o CPF contém exatamente 11 dígitos
+  };
 
   // Função para cadastrar um novo paciente no Supabase
   const handleCadastro = async () => {
     try {
+      if (!nome || !cpf || !dataNascimento || !sexo || !localNascimentoCidade) {
+        setErrorMessage('Por favor, preencha todos os campos obrigatórios.');
+        return;
+      }
+
+      if (!isValidCPF(cpf)) {
+        setErrorMessage('CPF inválido. Certifique-se de que contém 11 dígitos.');
+        return;
+      }
+
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user || !user.email) {
+        setErrorMessage('Usuário não autenticado ou email não disponível.');
+        return;
+      }
+
       const { data, error } = await supabase
         .from('pacientes')
-        .insert([{ nome, cpf, data_nascimento: dataNascimento }]);
+        .insert([
+          {
+            nome,
+            cpf,
+            data_nascimento: dataNascimento,
+            sexo,
+            local_nascimento_cidade: localNascimentoCidade,
+            local_nascimento_estado: localNascimentoEstado,
+            created_by: user.email, // Garantindo que o email do usuário seja usado
+            created_at: new Date().toISOString(),
+          },
+        ]);
 
       if (error) {
         console.error('Erro ao cadastrar paciente:', error);
+        setErrorMessage('Erro ao cadastrar paciente. Tente novamente mais tarde.');
         return;
       }
 
@@ -30,13 +68,25 @@ const Cadastro = () => {
       navigate('/');
     } catch (err) {
       console.error('Erro inesperado:', err);
+      setErrorMessage('Ocorreu um erro inesperado. Tente novamente mais tarde.');
     }
+  };
+
+  // Função para lidar com mudanças no campo de nome
+  const handleNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNome(event.target.value);
+  };
+
+  // Função para lidar com mudanças no campo de CPF
+  const handleCpfChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCpf(event.target.value);
   };
 
   return (
     <div className="register-container">
-      {/* Renderiza o título da página */}
       <h1 className="register-title">Cadastrar Paciente</h1>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <div className="register-section">
         <label htmlFor="nome" className="register-label">Nome:</label>
@@ -44,7 +94,7 @@ const Cadastro = () => {
           type="text"
           id="nome"
           className="register-input"
-          placeholder="Nome completo"
+          placeholder="Nome do Paciente"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
         />
@@ -54,7 +104,7 @@ const Cadastro = () => {
           type="text"
           id="cpf"
           className="register-input"
-          placeholder="CPF"
+          placeholder="Somente números"
           value={cpf}
           onChange={(e) => setCpf(e.target.value)}
         />
@@ -66,6 +116,38 @@ const Cadastro = () => {
           className="register-input"
           value={dataNascimento}
           onChange={(e) => setDataNascimento(e.target.value)}
+        />
+
+        <label htmlFor="sexo" className="register-label">Sexo:</label>
+        <select
+          id="sexo"
+          className="register-input"
+          value={sexo}
+          onChange={(e) => setSexo(e.target.value)}
+        >
+          <option value="">Selecione</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
+        </select>
+
+        <label htmlFor="localNascimentoCidade" className="register-label">Cidade de Nascimento:</label>
+        <input
+          type="text"
+          id="localNascimentoCidade"
+          className="register-input"
+          placeholder="Cidade de Nascimento"
+          value={localNascimentoCidade}
+          onChange={(e) => setLocalNascimentoCidade(e.target.value)}
+        />
+
+        <label htmlFor="localNascimentoEstado" className="register-label">Estado de Nascimento:</label>
+        <input
+          type="text"
+          id="localNascimentoEstado"
+          className="register-input"
+          placeholder="Estado de Nascimento"
+          value={localNascimentoEstado}
+          onChange={(e) => setLocalNascimentoEstado(e.target.value)}
         />
 
         <div className="button-container">
