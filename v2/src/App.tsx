@@ -14,6 +14,7 @@ import ProtectedRoute from './pages/ProtectedRoute';
 import Dashboard from './pages/Dashboard'; // Exemplo de página protegida
 import NovoLogin from './pages/Register';
 import AuthRedirect from './pages/AuthRedirect';
+import Buscar from './pages/Buscar'; // Importando o componente correto
 
 // Este é o componente principal do aplicativo
 function App() {
@@ -90,7 +91,7 @@ function App() {
           path="/buscar"
           element={
             <ProtectedRoute>
-              <Cadastro />
+              <Buscar />
             </ProtectedRoute>
           }
         />
