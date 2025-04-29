@@ -27,20 +27,32 @@ const Cadastro = () => {
   // Função para buscar paciente no Supabase
   const handleSearch = async () => {
     try {
+<<<<<<< HEAD
       const sanitizedSearch = search.replace(/\D/g, ''); // Remove caracteres não numéricos do CPF
       const { data, error } = await supabase
         .from('pacientes')
         .select('*')
         .or(`cpf.eq.${search},cpf.eq.${sanitizedSearch},nome.ilike.%${search}%`);
+=======
+      const sanitizedSearch = search.replace(/\D/g, ''); // Remove pontos e traços do CPF
+      const { data, error } = await supabase
+        .from('pacientes')
+        .select('*')
+        .or(`cpf.eq.${sanitizedSearch},nome.ilike.%${search}%`);
+>>>>>>> 980686b (Update README.md)
 
       if (error) {
         console.error('Erro ao buscar paciente:', error);
         return;
       }
 
+<<<<<<< HEAD
       console.log('Dados retornados pela busca:', data);
 
       if (!data || data.length === 0) {
+=======
+      if (data.length === 0) {
+>>>>>>> 980686b (Update README.md)
         setPatientData(null);
         setIsNew(true);
       } else if (data.length === 1) {
