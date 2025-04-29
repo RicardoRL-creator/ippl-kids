@@ -1,0 +1,148 @@
+/* Estilização para a página de registro */
+
+.register-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.register-subtitle {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.register-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+}
+
+.register-input {
+  flex: 1;
+  margin-right: 0;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Alinhar os campos Nome, CPF, Data de nascimento e Local de nascimento à esquerda */
+.register-section label,
+.register-section input {
+  text-align: left;
+  display: block;
+  width: 100%;
+}
+
+.small-input {
+  display: inline-block;
+  width: calc(50% - 10px);
+  margin-right: 10px;
+  text-align: left;
+}
+
+.inline-radio {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.register-button {
+  margin: 10px 5px; /* Espaçamento entre os botões */
+  padding: 10px 20px; /* Tamanhos consistentes */
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+}
+
+.register-button:first-of-type {
+  background-color: #4CAF50; /* Verde para o botão de login */
+  color: white;
+}
+
+.register-button:last-of-type {
+  background-color: #2196F3; /* Azul para o botão de novo cadastro */
+  color: white;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+}
+
+.register-error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.back-button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+}
+
+/* Ajuste no campo de busca para reduzir o tamanho */
+.search-input {
+  width: calc(100% - 20px);
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
