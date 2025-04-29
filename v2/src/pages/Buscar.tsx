@@ -3,62 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import './Register.css';
 
+interface Patient {
+  id: string;
+  nome: string;
+  cpf: string;
+  data_nascimento: string;
+}
+
 const Buscar = () => {
   const [search, setSearch] = useState('');
-  const [patients, setPatients] = useState([]);
-  const [notFound, setNotFound] = useState(false);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const handleSearch = async () => {
-    if (search.trim().length < 3) {
-      alert('Por favor, insira ao menos 3 caracteres para realizar a busca.');
-      return;
-    }
-
-    setLoading(true);
-    setNotFound(false);
-    setPatients([]);
-
-    try {
-      const { data, error } = await supabase
-        .from('pacientes')
-        .select('id, nome, cpf, data_nascimento')
-        .or(`cpf.eq.${search},nome.ilike.%${search}%`);
-
-      if (error) {
-        console.error('Erro ao buscar paciente:', error);
-        setNotFound(true);
-      } else if (data && data.length > 0) {
-        const formattedData = data.map((patient) => ({
-          ...patient,
-          data_nascimento: new Date(patient.data_nascimento).toLocaleDateString('pt-BR'),
-        }));
-        setPatients(formattedData);
-      } else {
-        setNotFound(true);
-      }
-    } catch (err) {
-      console.error('Erro inesperado:', err);
-      setNotFound(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSelectPatient = (patientId: string) => {
-    const selectedPatient = patients.find((p) => p.id === patientId);
-    if (selectedPatient) {
-      setPatients([selectedPatient]);
-    }
-  };
-
-  const handleNewRegister = () => {
-    navigate('/cadastro');
+  const handleSearch = () => {
+    console.log('Buscar paciente:', search);
   };
 
   return (
