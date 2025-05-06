@@ -138,54 +138,43 @@ const AplicacaoProvas = () => {
         </div>
       )}
 
-      {/* Seção 2: Habilidades Metafonológicas */}
+      {/* Seção 2.1: Produção de Rima */}
       {currentSection === 1 && (
-        <div className="register-section">
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
           <h2>2. Habilidades Metafonológicas</h2>
-          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
-            <p>2.1. Produção de Rima</p>
-            <p>2.2. Identificação de Rima</p>
-            <p>2.3. Segmentação Silábica</p>
-            <p>2.4. Produção de palavras a partir do fonema dado</p>
-            <p>2.5. Síntese Fonêmica</p>
-            <p>2.6. Análise Fonêmica</p>
-            <p>2.7. Identificação de Fonema Inicial</p>
-          </div>
-          <div className="section-grid">
-            <div>
-              <h3>2.1. Produção de Rima</h3>
-              {responses.rhymeProduction.map((_, index) => (
-                <div key={index}>
-                  <label>
-                    Produção {index + 1}:
-                    <select
-                      onChange={(e) =>
-                        handleInputChange('rhymeProduction', index, e.target.value)
-                      }
-                      value={responses.rhymeProduction[index] || ''}
-                    >
-                      <option value="">Selecione</option>
-                      <option value="1">1 (Acerto)</option>
-                      <option value="0">0 (Erro)</option>
-                    </select>
-                  </label>
+          <p>2.1. Produção de Rima</p>
+          <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', columnGap: '30px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
                   <input
                     type="text"
-                    maxLength={30}
-                    placeholder="Anote a resposta aqui"
-                    style={{ marginLeft: '10px', padding: '5px', width: '200px' }}
+                    maxLength={20}
+                    placeholder="Digite aqui"
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px' }}
+                    onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
                   />
                 </div>
-              ))}
-            </div>
-            {/* Adicione outras subseções aqui, se necessário */}
+              </div>
+            ))}
           </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(0)}>Voltar</button>
             <button
               className="register-button"
               onClick={() => setCurrentSection(2)}
@@ -199,18 +188,38 @@ const AplicacaoProvas = () => {
 
       {/* Seção 2.2: Identificação de Rima */}
       {currentSection === 2 && (
-        <div className="register-section">
-          <h2>2.2. Identificação de Rima</h2>
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
+          <h2>2. Habilidades Metafonológicas</h2>
+          <p>2.2. Identificação de Rima</p>
+          <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', columnGap: '40px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(1)}>Voltar</button>
             <button
               className="register-button"
               onClick={() => setCurrentSection(3)}
-              disabled={false} // Atualize a lógica de desabilitação conforme necessário
+              disabled={!isSectionComplete('rhymeProduction')}
             >
               Próxima Seção
             </button>
@@ -220,18 +229,45 @@ const AplicacaoProvas = () => {
 
       {/* Seção 2.3: Segmentação Silábica */}
       {currentSection === 3 && (
-        <div className="register-section">
-          <h2>2.3. Segmentação Silábica</h2>
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
+          <h2>2. Habilidades Metafonológicas</h2>
+          <p>2.3. Segmentação Silábica</p>
+          <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', columnGap: '30px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
+                  <input
+                    type="number"
+                    maxLength={2}
+                    placeholder="Digite"
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '60px' }}
+                    onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(2)}>Voltar</button>
             <button
               className="register-button"
               onClick={() => setCurrentSection(4)}
-              disabled={false} // Atualize a lógica de desabilitação conforme necessário
+              disabled={!isSectionComplete('rhymeProduction')}
             >
               Próxima Seção
             </button>
@@ -241,18 +277,45 @@ const AplicacaoProvas = () => {
 
       {/* Seção 2.4: Produção de palavras a partir do fonema dado */}
       {currentSection === 4 && (
-        <div className="register-section">
-          <h2>2.4. Produção de palavras a partir do fonema dado</h2>
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
+          <h2>2. Habilidades Metafonológicas</h2>
+          <p>2.4. Produção de palavras a partir do fonema dado</p>
+          <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', columnGap: '30px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
+                  <input
+                    type="text"
+                    maxLength={20}
+                    placeholder="Digite aqui"
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px' }}
+                    onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(3)}>Voltar</button>
             <button
               className="register-button"
               onClick={() => setCurrentSection(5)}
-              disabled={false} // Atualize a lógica de desabilitação conforme necessário
+              disabled={!isSectionComplete('rhymeProduction')}
             >
               Próxima Seção
             </button>
@@ -262,18 +325,45 @@ const AplicacaoProvas = () => {
 
       {/* Seção 2.5: Síntese Fonêmica */}
       {currentSection === 5 && (
-        <div className="register-section">
-          <h2>2.5. Síntese Fonêmica</h2>
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
+          <h2>2. Habilidades Metafonológicas</h2>
+          <p>2.5. Síntese Fonêmica</p>
+          <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', columnGap: '30px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
+                  <input
+                    type="text"
+                    maxLength={20}
+                    placeholder="Digite aqui"
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px' }}
+                    onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(4)}>Voltar</button>
             <button
               className="register-button"
               onClick={() => setCurrentSection(6)}
-              disabled={false} // Atualize a lógica de desabilitação conforme necessário
+              disabled={!isSectionComplete('rhymeProduction')}
             >
               Próxima Seção
             </button>
@@ -283,18 +373,45 @@ const AplicacaoProvas = () => {
 
       {/* Seção 2.6: Análise Fonêmica */}
       {currentSection === 6 && (
-        <div className="register-section">
-          <h2>2.6. Análise Fonêmica</h2>
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
+          <h2>2. Habilidades Metafonológicas</h2>
+          <p>2.6. Análise Fonêmica</p>
+          <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', columnGap: '30px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
+                  <input
+                    type="text"
+                    maxLength={20}
+                    placeholder="Digite aqui"
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px' }}
+                    onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(5)}>Voltar</button>
             <button
               className="register-button"
               onClick={() => setCurrentSection(7)}
-              disabled={false} // Atualize a lógica de desabilitação conforme necessário
+              disabled={!isSectionComplete('rhymeProduction')}
             >
               Próxima Seção
             </button>
@@ -304,18 +421,45 @@ const AplicacaoProvas = () => {
 
       {/* Seção 2.7: Identificação de Fonema Inicial */}
       {currentSection === 7 && (
-        <div className="register-section">
-          <h2>2.7. Identificação de Fonema Inicial</h2>
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
+          <h2>2. Habilidades Metafonológicas</h2>
+          <p>2.7. Identificação de Fonema Inicial</p>
+          <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', columnGap: '30px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
+                  <input
+                    type="text"
+                    maxLength={20}
+                    placeholder="Digite aqui"
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px' }}
+                    onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(6)}>Voltar</button>
             <button
               className="register-button"
               onClick={() => setCurrentSection(8)}
-              disabled={false} // Atualize a lógica de desabilitação conforme necessário
+              disabled={!isSectionComplete('rhymeProduction')}
             >
               Próxima Seção
             </button>
@@ -325,21 +469,44 @@ const AplicacaoProvas = () => {
 
       {/* Seção 3: Memória Operacional Fonológica */}
       {currentSection === 8 && (
-        <div className="register-section">
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
           <h2>3. Memória Operacional Fonológica</h2>
-          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
-            <p>Memória Operacional Fonológica</p>
+            <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', columnGap: '30px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
+                  <input
+                    type="text"
+                    maxLength={20}
+                    placeholder="Digite aqui"
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px' }}
+                    onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(7)}>Voltar</button>
             <button
               className="register-button"
               onClick={() => setCurrentSection(9)}
-              disabled={false} // Atualize a lógica de desabilitação conforme necessário
+              disabled={!isSectionComplete('rhymeProduction')}
             >
               Próxima Seção
             </button>
@@ -351,9 +518,6 @@ const AplicacaoProvas = () => {
       {currentSection === 9 && (
         <div className="register-section">
           <h2>4. Nomeação Automática Rápida</h2>
-          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
-            <p>Nomeação Automática Rápida</p>
-          </div>
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -373,21 +537,44 @@ const AplicacaoProvas = () => {
 
       {/* Seção 5: Leitura Silenciosa */}
       {currentSection === 10 && (
-        <div className="register-section">
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
           <h2>5. Leitura Silenciosa</h2>
-          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
-            <p>Leitura Silenciosa</p>
+          <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', columnGap: '30px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
+                  <input
+                    type="text"
+                    maxLength={20}
+                    placeholder="Digite aqui"
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px' }}
+                    onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(9)}>Voltar</button>
             <button
               className="register-button"
               onClick={() => setCurrentSection(11)}
-              disabled={false} // Atualize a lógica de desabilitação conforme necessário
+              disabled={!isSectionComplete('rhymeProduction')}
             >
               Próxima Seção
             </button>
@@ -397,21 +584,44 @@ const AplicacaoProvas = () => {
 
       {/* Seção 6: Leitura de palavras e pseudopalavras */}
       {currentSection === 11 && (
-        <div className="register-section">
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
           <h2>6. Leitura de palavras e pseudopalavras</h2>
-          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
-            <p>Leitura de palavras e pseudopalavras</p>
+          <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', columnGap: '30px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
+                  <input
+                    type="text"
+                    maxLength={20}
+                    placeholder="Digite aqui"
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px' }}
+                    onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(10)}>Voltar</button>
             <button
               className="register-button"
               onClick={() => setCurrentSection(12)}
-              disabled={false} // Atualize a lógica de desabilitação conforme necessário
+              disabled={!isSectionComplete('rhymeProduction')}
             >
               Próxima Seção
             </button>
@@ -421,21 +631,44 @@ const AplicacaoProvas = () => {
 
       {/* Seção 7: Compreensão Auditiva de sentenças a partir de figuras */}
       {currentSection === 12 && (
-        <div className="register-section">
+        <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
           <h2>7. Compreensão Auditiva de sentenças a partir de figuras</h2>
-          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
-            <p>Compreensão Auditiva de sentenças a partir de figuras</p>
+            <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', columnGap: '30px', rowGap: '10px' }}>
+            {responses.rhymeProduction.map((_, index) => (
+              <div key={index} className="letra-item">
+                <label>{index + 1}:</label>
+                <div className="thumb-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '1' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '1')}
+                  >
+                    <FaThumbsUp />
+                  </button>
+                  <button
+                    type="button"
+                    className={`thumb-button ${responses.rhymeProduction[index] === '0' ? 'selected' : ''}`}
+                    onClick={() => handleInputChange('rhymeProduction', index, '0')}
+                  >
+                    <FaThumbsDown />
+                  </button>
+                  <input
+                    type="text"
+                    maxLength={20}
+                    placeholder="Digite aqui"
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px' }}
+                    onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
           <div className="button-container">
-            {currentSection > 0 && (
-              <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
-                Voltar
-              </button>
-            )}
+            <button className="register-button" onClick={() => setCurrentSection(11)}>Voltar</button>
             <button
               className="register-button"
               onClick={saveResults}
-              disabled={false}
+              disabled={!isSectionComplete('rhymeProduction')}
             >
               Finalizar e Salvar
             </button>
