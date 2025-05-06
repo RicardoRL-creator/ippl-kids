@@ -2,6 +2,8 @@ import './Register.css';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 // Este componente gerencia a aplicação de provas, incluindo várias seções de avaliação e navegação entre elas.
 const AplicacaoProvas = () => {
@@ -65,7 +67,7 @@ const AplicacaoProvas = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
             <p><strong>Nome:</strong> {patient.nome}</p>
             <p><strong>CPF:</strong> {patient.cpf}</p>
-            <p><strong>DN:</strong> {patient.data_nascimento}</p>
+            <p><strong>DN:</strong> {format(new Date(patient.data_nascimento), 'dd/MM/yyyy', { locale: ptBR })}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <label>
@@ -92,40 +94,58 @@ const AplicacaoProvas = () => {
 
       {/* Seção 1: Conhecimento do Alfabeto */}
       {currentSection === 0 && (
-        <div className="register-section">
+        <div className="register-section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <h2>1. Conhecimento do Alfabeto</h2>
-          <div
-            className="alphabet-grid"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '10px',
-            }}
-          >
-            {responses.alphabetKnowledge.map((_, index) => (
-              <div
-                key={index}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  fontSize: '0.9rem',
-                }}
-              >
-                <label style={{ whiteSpace: 'nowrap' }}>Letra {alphabetSequence[index]}:</label>
-                <select
-                  style={{ flex: '1', minWidth: '90px' }}
-                  onChange={(e) =>
-                    handleInputChange('alphabetKnowledge', index, e.target.value)
-                  }
-                  value={responses.alphabetKnowledge[index] || ''}
+          <div className="patient-info" style={{
+            border: '1px solid #ccc',
+            padding: '10px',
+            borderRadius: '8px',
+            marginBottom: '20px',
+            backgroundColor: '#f9f9f9',
+            display: 'flex',
+            flexDirection: 'column',
+            fontSize: '0.9rem',
+            gap: '10px',
+            alignItems: 'center',
+            maxWidth: '850px', // Ajusta a largura para ser igual à caixa de dados do paciente
+            width: '100%',
+            margin: '0 auto' // Centraliza a caixa na página
+          }}>
+            <p>Sequência de letras do alfabeto.</p>
+            <div
+              className="alphabet-grid"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '10px',
+                width: '100%', // Garante que o grid ocupe toda a largura disponível
+              }}
+            >
+              {responses.alphabetKnowledge.map((_, index) => (
+                <div
+                  key={index}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    fontSize: '0.9rem',
+                  }}
                 >
-                  <option value="">Selecione</option>
-                  <option value="1">1 (Acerto)</option>
-                  <option value="0">0 (Erro)</option>
-                </select>
-              </div>
-            ))}
+                  <label style={{ whiteSpace: 'nowrap' }}>Letra {alphabetSequence[index]}:</label>
+                  <select
+                    style={{ flex: '1', minWidth: '90px' }}
+                    onChange={(e) =>
+                      handleInputChange('alphabetKnowledge', index, e.target.value)
+                    }
+                    value={responses.alphabetKnowledge[index] || ''}
+                  >
+                    <option value="">Selecione</option>
+                    <option value="1">1 (Acerto)</option>
+                    <option value="0">0 (Erro)</option>
+                  </select>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="button-container">
             <button className="register-button" onClick={() => navigate('/')}>Voltar</button>
@@ -144,6 +164,15 @@ const AplicacaoProvas = () => {
       {currentSection === 1 && (
         <div className="register-section">
           <h2>2. Habilidades Metafonológicas</h2>
+          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
+            <p>2.1. Produção de Rima</p>
+            <p>2.2. Identificação de Rima</p>
+            <p>2.3. Segmentação Silábica</p>
+            <p>2.4. Produção de palavras a partir do fonema dado</p>
+            <p>2.5. Síntese Fonêmica</p>
+            <p>2.6. Análise Fonêmica</p>
+            <p>2.7. Identificação de Fonema Inicial</p>
+          </div>
           <div className="section-grid">
             <div>
               <h3>2.1. Produção de Rima</h3>
@@ -194,7 +223,6 @@ const AplicacaoProvas = () => {
       {currentSection === 2 && (
         <div className="register-section">
           <h2>2.2. Identificação de Rima</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -216,7 +244,6 @@ const AplicacaoProvas = () => {
       {currentSection === 3 && (
         <div className="register-section">
           <h2>2.3. Segmentação Silábica</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -238,7 +265,6 @@ const AplicacaoProvas = () => {
       {currentSection === 4 && (
         <div className="register-section">
           <h2>2.4. Produção de palavras a partir do fonema dado</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -260,7 +286,6 @@ const AplicacaoProvas = () => {
       {currentSection === 5 && (
         <div className="register-section">
           <h2>2.5. Síntese Fonêmica</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -282,7 +307,6 @@ const AplicacaoProvas = () => {
       {currentSection === 6 && (
         <div className="register-section">
           <h2>2.6. Análise Fonêmica</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -304,7 +328,6 @@ const AplicacaoProvas = () => {
       {currentSection === 7 && (
         <div className="register-section">
           <h2>2.7. Identificação de Fonema Inicial</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -326,7 +349,9 @@ const AplicacaoProvas = () => {
       {currentSection === 8 && (
         <div className="register-section">
           <h2>3. Memória Operacional Fonológica</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
+          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
+            <p>Memória Operacional Fonológica</p>
+          </div>
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -348,7 +373,9 @@ const AplicacaoProvas = () => {
       {currentSection === 9 && (
         <div className="register-section">
           <h2>4. Nomeação Automática Rápida</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
+          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
+            <p>Nomeação Automática Rápida</p>
+          </div>
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -370,7 +397,9 @@ const AplicacaoProvas = () => {
       {currentSection === 10 && (
         <div className="register-section">
           <h2>5. Leitura Silenciosa</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
+          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
+            <p>Leitura Silenciosa</p>
+          </div>
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -392,7 +421,9 @@ const AplicacaoProvas = () => {
       {currentSection === 11 && (
         <div className="register-section">
           <h2>6. Leitura de palavras e pseudopalavras</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
+          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
+            <p>Leitura de palavras e pseudopalavras</p>
+          </div>
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -414,6 +445,9 @@ const AplicacaoProvas = () => {
       {currentSection === 12 && (
         <div className="register-section">
           <h2>7. Compreensão Auditiva de sentenças a partir de figuras</h2>
+          <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
+            <p>Compreensão Auditiva de sentenças a partir de figuras</p>
+          </div>
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
