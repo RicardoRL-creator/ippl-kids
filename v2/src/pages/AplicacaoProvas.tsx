@@ -1,15 +1,19 @@
 import './Register.css';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
 
 // Este componente gerencia a aplicação de provas, incluindo várias seções de avaliação e navegação entre elas.
 const AplicacaoProvas = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [currentSection, setCurrentSection] = useState(0); // Estado para controlar a seção atual
   const [responses, setResponses] = useState({
     alphabetKnowledge: Array(20).fill(null), // Respostas para o conhecimento do alfabeto
     rhymeProduction: Array(20).fill(null), // Respostas para a produção de rima
   });
+
+  const patient = location.state?.patient;
 
   // Sequência de letras do alfabeto
   const alphabetSequence = [
@@ -29,9 +33,62 @@ const AplicacaoProvas = () => {
     return responses[section].every((response: any) => response !== null);
   };
 
+  const saveResults = async () => {
+    if (!patient) return;
+
+    try {
+      const { error } = await supabase.from('provas').insert({
+        patient_id: patient.id,
+        results: responses,
+        created_at: new Date().toISOString(),
+      });
+
+      if (error) {
+        console.error('Erro ao salvar resultados:', error);
+        alert('Erro ao salvar resultados. Tente novamente.');
+      } else {
+        alert('Resultados salvos com sucesso!');
+        navigate('/');
+      }
+    } catch (err) {
+      console.error('Erro inesperado:', err);
+      alert('Erro inesperado ao salvar resultados.');
+    }
+  };
+
   return (
     <div className="register-container" style={{ maxWidth: '850px', margin: '0 auto', padding: '0 10px' }}>
       <h1 className="register-title">Aplicação de Provas</h1>
+
+      {patient && (
+        <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
+            <p><strong>Nome:</strong> {patient.nome}</p>
+            <p><strong>CPF:</strong> {patient.cpf}</p>
+            <p><strong>DN:</strong> {patient.data_nascimento}</p>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <label>
+              <strong>Data da Aplicação:</strong>
+              <input
+                type="date"
+                required
+                onChange={(e) => {
+                  const applicationDate = new Date(e.target.value);
+                  const birthDate = new Date(patient.data_nascimento);
+                  const diffTime = Math.abs(applicationDate.getTime() - birthDate.getTime());
+                  const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365.25));
+                  const diffMonths = Math.floor((diffTime % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+                  const diffDays = Math.floor((diffTime % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+                  document.getElementById('age-display')!.textContent = `Idade: ${diffYears} anos, ${diffMonths} meses, ${diffDays} dias`;
+                }}
+                style={{ marginLeft: '10px', padding: '5px', border: '1px solid #ccc', borderRadius: '4px' }}
+              />
+            </label>
+            <p id="age-display" style={{ margin: 0, fontWeight: 'bold' }}><strong>Idade:</strong> </p>
+          </div>
+        </div>
+      )}
 
       {/* Seção 1: Conhecimento do Alfabeto */}
       {currentSection === 0 && (
@@ -357,7 +414,6 @@ const AplicacaoProvas = () => {
       {currentSection === 12 && (
         <div className="register-section">
           <h2>7. Compreensão Auditiva de sentenças a partir de figuras</h2>
-          {/* Conteúdo da seção será adicionado posteriormente */}
           <div className="button-container">
             {currentSection > 0 && (
               <button className="register-button" onClick={() => setCurrentSection(currentSection - 1)}>
@@ -366,10 +422,10 @@ const AplicacaoProvas = () => {
             )}
             <button
               className="register-button"
-              onClick={() => alert('Provas finalizadas!')}
-              disabled={false} // Atualize a lógica de desabilitação conforme necessário
+              onClick={saveResults}
+              disabled={false}
             >
-              Finalizar
+              Finalizar e Salvar
             </button>
           </div>
         </div>

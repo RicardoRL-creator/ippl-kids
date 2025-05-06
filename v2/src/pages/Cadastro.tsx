@@ -72,16 +72,6 @@ const Cadastro = () => {
     }
   };
 
-  // Função para lidar com mudanças no campo de nome
-  const handleNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNome(event.target.value);
-  };
-
-  // Função para lidar com mudanças no campo de CPF
-  const handleCpfChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCpf(event.target.value);
-  };
-
   return (
     <div className="register-container">
       <h1 className="register-title">Cadastrar Paciente</h1>
