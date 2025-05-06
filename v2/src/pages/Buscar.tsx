@@ -10,6 +10,11 @@ interface Patient {
   data_nascimento: string;
 }
 
+const formatDateToBrazilian = (date: string): string => {
+  const [year, month, day] = date.split('-');
+  return `${day}/${month}/${year}`;
+};
+
 const Buscar = () => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
@@ -90,7 +95,7 @@ const Buscar = () => {
           <h2>Dados do Paciente</h2>
           <p><strong>Nome:</strong> {patients[0].nome}</p>
           <p><strong>CPF:</strong> {patients[0].cpf}</p>
-          <p><strong>Data de Nascimento:</strong> {patients[0].data_nascimento}</p>
+          <p><strong>Data de Nascimento:</strong> {formatDateToBrazilian(patients[0].data_nascimento)}</p>
           <button
             className="register-button"
             onClick={() => handleGoToAplicacaoProvas(patients[0])}
