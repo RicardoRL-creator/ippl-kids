@@ -56,7 +56,7 @@ const Buscar = () => {
   };
 
   const handleNewRegister = () => {
-    console.log('Cadastrar novo paciente');
+    navigate('/cadastro');
   };
 
   const handleGoToAplicacaoProvas = (patient: Patient) => {
