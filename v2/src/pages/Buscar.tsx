@@ -10,6 +10,7 @@ interface Patient {
   data_nascimento: string;
 }
 
+// Formata uma data no formato ISO para o formato brasileiro (DD/MM/AAAA).
 const formatDateToBrazilian = (date: string): string => {
   const [year, month, day] = date.split('-');
   return `${day}/${month}/${year}`;
@@ -22,10 +23,12 @@ const Buscar = () => {
   const [notFound, setNotFound] = useState(false);
   const navigate = useNavigate();
 
+  // Atualiza o estado de busca com o valor inserido pelo usuário.
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
+  // Realiza a busca de pacientes no banco de dados com base no nome ou CPF.
   const handleSearch = async () => {
     setLoading(true);
     setNotFound(false);
@@ -53,6 +56,7 @@ const Buscar = () => {
     }
   };
 
+  // Filtra e seleciona um paciente específico com base no ID.
   const handleSelectPatient = (id: string) => {
     const selectedPatient = patients.find((patient) => patient.id === id);
     if (selectedPatient) {
@@ -60,10 +64,12 @@ const Buscar = () => {
     }
   };
 
+  // Navega para a página de cadastro de novo paciente.
   const handleNewRegister = () => {
     navigate('/cadastro');
   };
 
+  // Navega para a página de aplicação de provas com os dados do paciente selecionado.
   const handleGoToAplicacaoProvas = (patient: Patient) => {
     navigate('/aplicacao-provas', { state: { patient } });
   };

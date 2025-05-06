@@ -153,3 +153,58 @@
 .not-found {
   text-align: left;
 }
+
+.alfabeto-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: auto;
+  max-width: auto;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border: '1px solid #ccc';
+  border-radius: '8px';
+  margin-bottom: '20px';
+  flex Direction: 'column';
+  font-size: '0.9rem';
+  gap: '10px';
+}
+
+.letra-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: auto;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border: '1px solid #ccc';
+  border-radius: '8px';
+  margin-bottom: '20px';
+  font-size: '0.9rem';
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.thumb-group {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.thumb-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.thumb-button.selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}

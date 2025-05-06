@@ -15,11 +15,14 @@ const Cadastro = () => {
   const navigate = useNavigate();
 
   // Função para validar CPF
+  // Verifica se o CPF contém exatamente 11 dígitos.
   const isValidCPF = (cpf: string) => {
-    return /^\d{11}$/.test(cpf); // Verifica se o CPF contém exatamente 11 dígitos
+    return /^\d{11}$/.test(cpf);
   };
 
   // Função para cadastrar um novo paciente no Supabase
+  // Realiza validações nos campos obrigatórios e no CPF, obtém o usuário autenticado,
+  // e insere os dados do paciente na tabela 'pacientes' do Supabase.
   const handleCadastro = async () => {
     try {
       if (!nome || !cpf || !dataNascimento || !sexo || !localNascimentoCidade) {

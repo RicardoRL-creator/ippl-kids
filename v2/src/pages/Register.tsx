@@ -12,18 +12,22 @@ const NovoLogin = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // Função para lidar com o registro de um novo usuário
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      // Verifica se o e-mail já está cadastrado
       const emailExists = await checkIfEmailExists(email);
       if (emailExists) {
         setError('O e-mail já está cadastrado. Por favor, faça login ou use outro e-mail.');
         return;
       }
+      // Registra o usuário com os detalhes fornecidos
       await signUpWithDetails(email, password, { name, phone, birth_date: birthDate });
       alert('Registro bem-sucedido! Verifique seu e-mail para confirmar.');
       navigate('/login');
     } catch (err: any) {
+      // Define a mensagem de erro caso ocorra algum problema
       setError(err.message);
     }
   };

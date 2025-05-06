@@ -1,0 +1,33 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .alfabeto-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .letra-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .letra-item label {
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+  
+  .letra-item select {
+    width: 100%;
+    padding: 6px;
+  }
+  
