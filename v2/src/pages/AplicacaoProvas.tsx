@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
+import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 
 // Este componente gerencia a aplicação de provas, incluindo várias seções de avaliação e navegação entre elas.
 const AplicacaoProvas = () => {
@@ -65,7 +66,20 @@ const AplicacaoProvas = () => {
   };
 
   return (
-    <div className="register-container" style={{ maxWidth: '850px', margin: '0 auto', padding: '0 10px' }}>
+    <div className="register-container" 
+    style={{ maxWidth: '850px',
+    marginTop: '300px',
+    margin: '0 auto', 
+    padding: '0 10px', 
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    gap: '5px', 
+    fontSize: '0.9rem',
+    borderRadius: '8px', 
+    padding: '20px',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+     }}> 
       <div className="home-background"></div>
       <h1 className="register-title">Aplicação de Provas</h1>
       {patient && (
