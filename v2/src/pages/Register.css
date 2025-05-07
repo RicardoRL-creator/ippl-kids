@@ -217,3 +217,8 @@ html, body {
   color: white;
   border-color: #0056b3;
 }
+
+.register-logo {
+  width: 250px; /* Reduzindo o tamanho da imagem */
+  height: auto; /* Mantendo a proporção */
+}
