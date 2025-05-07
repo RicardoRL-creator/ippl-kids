@@ -22,12 +22,14 @@ function App() {
   const location = useLocation();
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [loading, setLoading] = useState(true); // Estado de carregamento
 
   useEffect(() => {
     const fetchUserData = async () => {
       const { data: { user }, error } = await supabase.auth.getUser();
       if (error) {
         console.error('Erro ao obter dados do usuário:', error);
+        setLoading(false); // Finaliza o carregamento mesmo em caso de erro
         return;
       }
 
@@ -47,6 +49,7 @@ function App() {
           setUserName(profile?.username || 'Usuário');
         }
       }
+      setLoading(false); // Finaliza o carregamento após buscar os dados
     };
 
     fetchUserData();
@@ -70,7 +73,11 @@ function App() {
       )}
       {location.pathname !== '/login' && (
         <div style={{ position: 'absolute', top: 10, right: 10, display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span>{userName} ({userEmail})</span>
+          {loading ? (
+            <span>Carregando...</span> // Exibe um texto enquanto carrega
+          ) : (
+            <span>{userName} ({userEmail})</span>
+          )}
           <button onClick={handleSignOut}>Sair</button>
         </div>
       )}
