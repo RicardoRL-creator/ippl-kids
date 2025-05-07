@@ -9,7 +9,6 @@ import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
-import { MdHeight } from 'react-icons/md';
 
 // Este componente gerencia a aplicação de provas, incluindo várias seções de avaliação e navegação entre elas.
 const AplicacaoProvas = () => {
@@ -117,6 +116,19 @@ const AplicacaoProvas = () => {
 
       {/* Seção 1: Conhecimento do Alfabeto */}
       {currentSection === 0 && (
+        <div className="register-section" 
+        style={{ border: '1px solid #ccc',
+        padding: '10px', 
+        borderRadius: '8px', 
+        marginBottom: '20px', 
+        backgroundColor: '#f9f9f9',        
+        display: 'flex',
+        flexDirection: 'column', 
+        fontSize: '0.9rem', 
+        gap: '10px', 
+        marginTop: '1px',
+             
+         }}>
         <div className="register-section" 
         style={{ border: '1px solid #ccc',
         padding: '10px', 
