@@ -8,6 +8,8 @@ import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
+import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
+import { MdHeight } from 'react-icons/md';
 
 // Este componente gerencia a aplicação de provas, incluindo várias seções de avaliação e navegação entre elas.
 const AplicacaoProvas = () => {
@@ -71,6 +73,7 @@ const AplicacaoProvas = () => {
     style={{ maxWidth: '850px',
     marginTop: '300px',
     margin: '0 auto', 
+    padding: '0 10px', 
     display: 'flex', 
     flexDirection: 'column', 
     alignItems: 'center', 
@@ -84,7 +87,7 @@ const AplicacaoProvas = () => {
       <h1 className="register-title">Aplicação de Provas</h1>
       {patient && (
         <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '50px' }}>
             <p><strong>Nome:</strong> {patient.nome}</p>
             <p><strong>CPF:</strong> {patient.cpf}</p>
             <p><strong>DN:</strong> {format(new Date(patient.data_nascimento), 'dd/MM/yyyy', { locale: ptBR })}</p>
@@ -114,7 +117,19 @@ const AplicacaoProvas = () => {
 
       {/* Seção 1: Conhecimento do Alfabeto */}
       {currentSection === 0 && (
-        <div className="register-section" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
+        <div className="register-section" 
+        style={{ border: '1px solid #ccc',
+        padding: '10px', 
+        borderRadius: '8px', 
+        marginBottom: '20px', 
+        backgroundColor: '#f9f9f9',        
+        display: 'flex',
+        flexDirection: 'column', 
+        fontSize: '0.9rem', 
+        gap: '10px', 
+        marginTop: '1px',
+             
+         }}>
           <h2>1. Conhecimento do Alfabeto</h2>
              <div className="alfabeto-box">
               {responses.alphabetKnowledge.map((_, index) => (
