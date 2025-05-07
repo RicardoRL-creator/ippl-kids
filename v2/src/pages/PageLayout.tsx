@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import './PageLayout.css';
 
 interface PageLayoutProps {
@@ -8,7 +7,7 @@ interface PageLayoutProps {
 }
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children, isAuthenticated }) => {
-  const location = useLocation();
+  // Removed unused 'location' variable
 
   // Define o fundo com base no estado de autenticação
   const backgroundClass = isAuthenticated ? 'logged-background' : 'unlogged-background';
