@@ -2,7 +2,6 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import { signOut, supabase } from './supabaseClient';
 import { useState, useEffect } from 'react';
-
 import Home from './pages/Home';
 import Cadastro from './pages/Cadastro';
 import AplicacaoProvas from './pages/AplicacaoProvas';
