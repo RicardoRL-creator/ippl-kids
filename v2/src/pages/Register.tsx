@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { signUpWithDetails, checkIfEmailExists } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import './Register.css'; // Importando o CSS para estilização
+import PageLayout from './PageLayout';
 
 const NovoLogin = () => {
   const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ const NovoLogin = () => {
   const [birthDate, setBirthDate] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const isAuthenticated = false; // Página não logada
 
   // Função para lidar com o registro de um novo usuário
   const handleRegister = async (e: React.FormEvent) => {
@@ -33,59 +35,61 @@ const NovoLogin = () => {
   };
 
   return (
-    <div className="register-container">
-      <h1 className="register-title">Bem-vindo!</h1>
-      <p className="register-subtitle">Por favor, cadastre-se para continuar</p>
-      <form className="register-form" onSubmit={handleRegister}>
-        <label className="register-label">Nome Completo</label>
-        <input
-          type="text"
-          className="register-input"
-          placeholder="Digite seu nome completo"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <label className="register-label">E-mail</label>
-        <input
-          type="email"
-          className="register-input"
-          placeholder="Digite seu e-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <label className="register-label">Telefone</label>
-        <input
-          type="tel"
-          className="register-input"
-          placeholder="Digite seu telefone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          required
-        />
-        <label className="register-label">Data de Nascimento</label>
-        <input
-          type="date"
-          className="register-input"
-          value={birthDate}
-          onChange={(e) => setBirthDate(e.target.value)}
-          required
-        />
-        <label className="register-label">Senha</label>
-        <input
-          type="password"
-          className="register-input"
-          placeholder="Crie uma senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" className="register-button">Cadastrar</button>
-      </form>
-      {error && <p className="register-error">{error}</p>}
-      <button className="back-button" onClick={() => navigate(-1)}>Voltar</button>
-    </div>
+    <PageLayout isAuthenticated={isAuthenticated}>
+      <div className="register-container">
+        <h1 className="register-title">Bem-vindo!</h1>
+        <p className="register-subtitle">Por favor, cadastre-se para continuar</p>
+        <form className="register-form" onSubmit={handleRegister}>
+          <label className="register-label">Nome Completo</label>
+          <input
+            type="text"
+            className="register-input"
+            placeholder="Digite seu nome completo"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <label className="register-label">E-mail</label>
+          <input
+            type="email"
+            className="register-input"
+            placeholder="Digite seu e-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <label className="register-label">Telefone</label>
+          <input
+            type="tel"
+            className="register-input"
+            placeholder="Digite seu telefone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+          <label className="register-label">Data de Nascimento</label>
+          <input
+            type="date"
+            className="register-input"
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
+            required
+          />
+          <label className="register-label">Senha</label>
+          <input
+            type="password"
+            className="register-input"
+            placeholder="Crie uma senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit" className="register-button">Cadastrar</button>
+        </form>
+        {error && <p className="register-error">{error}</p>}
+        <button className="back-button" onClick={() => navigate(-1)}>Voltar</button>
+      </div>
+    </PageLayout>
   );
 };
 

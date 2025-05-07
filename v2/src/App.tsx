@@ -56,7 +56,11 @@ function App() {
 
   const handleSignOut = async () => {
     try {
-      await signOut(userEmail); // Substitua pelo email do usuário autenticado
+      if (!userEmail) {
+        console.error('E-mail do usuário não encontrado.');
+        return;
+      }
+      await signOut(userEmail); // Passa o e-mail do usuário autenticado
       navigate('/login'); // Redireciona para a página de login após o logoff
     } catch (error) {
       console.error('Erro ao sair:', error);

@@ -4,6 +4,15 @@
   padding: 20px;
 }
 
+.aplicacao-provas-container {
+  background-image: url('/fundo.png'); /* Caminho absoluto para a imagem na pasta public */
+  background-size: cover; /* Faz o fundo cobrir toda a área */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Evita repetição da imagem */
+  height: 100vh; /* Faz o fundo ocupar toda a altura da página */
+  width: 100%; /* Faz o fundo ocupar toda a largura da página */
+}
+
 .patient-info {
   margin-bottom: 20px;
   padding: 10px;
