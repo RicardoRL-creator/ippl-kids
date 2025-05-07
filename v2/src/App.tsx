@@ -64,6 +64,11 @@ function App() {
   return (
     <div>
       {location.pathname !== '/login' && (
+        <div style={{ position: 'absolute', top: 5, left: 10 }}>
+          <img src="/public/logo.png" alt="Logo" style={{ height: '50px' }} />
+        </div>
+      )}
+      {location.pathname !== '/login' && (
         <div style={{ position: 'absolute', top: 10, right: 10, display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span>{userName} ({userEmail})</span>
           <button onClick={handleSignOut}>Sair</button>

@@ -53,28 +53,36 @@ const Login = () => {
           <h1 className="register-title">Bem-vindo de volta!</h1>
           <p className="register-subtitle">Por favor, faça login para continuar</p>
           <form className="register-form" onSubmit={handleLogin}>
-            <label className="register-label">E-mail</label>
-            <input
-              type="email"
-              className="register-input"
-              placeholder="Digite seu e-mail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label className="register-label">Senha</label>
-            <input
-              type="password"
-              className="register-input"
-              placeholder="Digite sua senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <button type="submit" className="register-button">Entrar</button>
+            <label className="register-label input-container">
+              <div className="input-wrapper">
+                <span className="icon">📧</span>
+                <input
+                  type="email"
+                  className="register-input"
+                  placeholder="Digite seu e-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+            </label>
+            <label className="register-label input-container">
+              <div className="input-wrapper">
+                <span className="icon">🔒</span>
+                <input
+                  type="password"
+                  className="register-input"
+                  placeholder="Digite sua senha"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+            </label>
+            <button type="submit" className="register-button same-size">Entrar</button>
           </form>
           {error && <p className="register-error">{error}</p>}
-          <button className="register-button" onClick={() => navigate('/register')}>Novo Cadastro</button>
+          <button className="register-button same-size" onClick={() => navigate('/register')}>Novo cadastro</button>
         </div>
       </div>
     </div>
