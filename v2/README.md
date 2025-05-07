@@ -102,6 +102,16 @@ O componente de Aplicação de Provas gerencia várias seções de avaliação, 
 - **Navegação**:
   - Utiliza botões para avançar ou voltar entre as seções.
 
+## Atualizações Recentes
+
+### Melhorias no Código
+
+- Corrigido um problema no componente `Login.tsx` onde o componente `Header` foi declarado, mas nunca utilizado. A declaração foi removida para evitar confusão e melhorar a legibilidade do código.
+
+### Atualizações na Documentação
+
+- Adicionada uma seção de "Atualizações Recentes" para destacar melhorias e correções no projeto.
+
 ## Contribuição
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.

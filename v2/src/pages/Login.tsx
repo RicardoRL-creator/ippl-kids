@@ -4,13 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid'; // Importar para gerar um deviceId único
 import './Register.css'; // Reutilizando o CSS da tela de registro
 
-const Header = ({ userName, userEmail, onLogout }: { userName: string; userEmail: string; onLogout: () => void }) => (
-  <div className="header">
-    <span className="user-info">{userName} ({userEmail})</span>
-    <button className="logout-button" onClick={onLogout}>Sair</button>
-  </div>
-);
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
