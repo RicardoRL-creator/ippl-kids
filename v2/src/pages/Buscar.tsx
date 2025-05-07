@@ -76,7 +76,8 @@ const Buscar = () => {
   };
 
   return (
-    <div className="home-background">
+    <>
+      <div className="home-background"></div>
       <div className="register-container">
         <h1 className="register-title">Localizar Paciente</h1>
 
@@ -138,7 +139,7 @@ const Buscar = () => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

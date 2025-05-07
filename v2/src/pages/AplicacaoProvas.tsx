@@ -5,6 +5,7 @@ import { supabase } from '../supabaseClient';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
+import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 
 // Este componente gerencia a aplicação de provas, incluindo várias seções de avaliação e navegação entre elas.
 const AplicacaoProvas = () => {
@@ -65,8 +66,8 @@ const AplicacaoProvas = () => {
 
   return (
     <div className="register-container" style={{ maxWidth: '850px', margin: '0 auto', padding: '0 10px' }}>
+      <div className="home-background"></div>
       <h1 className="register-title">Aplicação de Provas</h1>
-
       {patient && (
         <div className="patient-info" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>

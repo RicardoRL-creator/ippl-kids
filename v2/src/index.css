@@ -69,6 +69,7 @@ button:focus-visible {
   left: 0;
   justify-content: center;
   align-items: center;
+  z-index: -1;
 }
 
 
