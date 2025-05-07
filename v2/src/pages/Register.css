@@ -1,5 +1,14 @@
 /* Estilização para a página de registro */
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
 .register-container {
   max-width: 400px;
   margin: 0 auto;
@@ -165,7 +174,7 @@
   border: '1px solid #ccc';
   border-radius: '8px';
   margin-bottom: '20px';
-  flex Direction: 'column';
+  flex-direction: column;
   font-size: '0.9rem';
   gap: '10px';
 }
@@ -207,4 +216,31 @@
   background-color: #007bff;
   color: white;
   border-color: #0056b3;
+}
+
+.login-container {
+  background-image: url('/SIPPLe.png');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.login-form-container {
+  width: 30%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }

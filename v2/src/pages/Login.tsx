@@ -47,32 +47,36 @@ const Login = () => {
   };
 
   return (
-    <div className="register-container">
-      <h1 className="register-title">Bem-vindo de volta!</h1>
-      <p className="register-subtitle">Por favor, faça login para continuar</p>
-      <form className="register-form" onSubmit={handleLogin}>
-        <label className="register-label">E-mail</label>
-        <input
-          type="email"
-          className="register-input"
-          placeholder="Digite seu e-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <label className="register-label">Senha</label>
-        <input
-          type="password"
-          className="register-input"
-          placeholder="Digite sua senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" className="register-button">Entrar</button>
-      </form>
-      {error && <p className="register-error">{error}</p>}
-      <button className="register-button" onClick={() => navigate('/register')}>Novo Cadastro</button>
+    <div className="login-container">
+      <div className="login-form-container">
+        <div className="register-container">
+          <h1 className="register-title">Bem-vindo de volta!</h1>
+          <p className="register-subtitle">Por favor, faça login para continuar</p>
+          <form className="register-form" onSubmit={handleLogin}>
+            <label className="register-label">E-mail</label>
+            <input
+              type="email"
+              className="register-input"
+              placeholder="Digite seu e-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <label className="register-label">Senha</label>
+            <input
+              type="password"
+              className="register-input"
+              placeholder="Digite sua senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="submit" className="register-button">Entrar</button>
+          </form>
+          {error && <p className="register-error">{error}</p>}
+          <button className="register-button" onClick={() => navigate('/register')}>Novo Cadastro</button>
+        </div>
+      </div>
     </div>
   );
 };

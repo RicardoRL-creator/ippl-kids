@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import Select from 'react-select';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
 // Este componente gerencia a aplicação de provas, incluindo várias seções de avaliação e navegação entre elas.
