@@ -7,6 +7,7 @@ import { ptBR } from 'date-fns/locale';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
+import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 
 // Este componente gerencia a aplicação de provas, incluindo várias seções de avaliação e navegação entre elas.
 const AplicacaoProvas = () => {
@@ -70,7 +71,6 @@ const AplicacaoProvas = () => {
     style={{ maxWidth: '850px',
     marginTop: '300px',
     margin: '0 auto', 
-    padding: '0 10px', 
     display: 'flex', 
     flexDirection: 'column', 
     alignItems: 'center', 
