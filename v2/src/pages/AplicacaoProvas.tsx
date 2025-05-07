@@ -141,8 +141,11 @@ const AplicacaoProvas = () => {
       {/* Seção 2.1: Produção de Rima */}
       {currentSection === 1 && (
         <div className="register-section" style={{ border: '1px solid #ccc', padding: '50px', borderRadius: '8px', marginBottom: '20px', backgroundColor: '#f9f9f9', display: 'flex', flexDirection: 'column', fontSize: '0.9rem', gap: '5px' }}>
-          <h2>2. Habilidades Metafonológicas</h2>
-          <p>2.1. Produção de Rima</p>
+          <h2 style={{ marginBottom: '1px', marginTop: '1px' }}>2. Habilidades Metafonológicas</h2>
+          <p style={{ marginBottom: '1px' }}>2.1. Produção de Rima</p>
+          <p style={{ marginBottom: '10px', fontSize: '0.7rem', color: '#555', fontStyle: 'italic', textAlign: 'justify', marginTop: '1px',  }}>
+            Instrução: Fale uma palavra que termine com o mesmo fonema. Eu vou dizer uma palavra (mão) e quero que você diga outra palavra que termine igual a palavra mão. Exemplo: pão, cão.
+          </p>
           <div className="alfabeto-box" style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', columnGap: '30px', rowGap: '10px' }}>
             {responses.rhymeProduction.map((_, index) => (
               <div key={index} className="letra-item">
@@ -162,11 +165,17 @@ const AplicacaoProvas = () => {
                   >
                     <FaThumbsDown />
                   </button>
+                  <span style={{ marginLeft: '10px', width: '8ch', display: 'inline-block' }}>
+                    {[
+                      'Cola', 'Bala', 'Papel', 'Foguete', 'Sapo', 'Minhoca', 'Sabão', 'Gato', 'Cor', 'Dente',
+                      'Pé', 'Castelo', 'Palha', 'Uva', 'Mamão', 'Mel', 'Pijama', 'Caneta', 'Vela', 'Chave'
+                    ][index]}
+                  </span>
                   <input
                     type="text"
                     maxLength={20}
                     placeholder="Digite aqui"
-                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px' }}
+                    style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px', width: '150px', marginLeft: '10px' }}
                     onChange={(e) => handleInputChange('rhymeProduction', index, e.target.value)}
                   />
                 </div>
