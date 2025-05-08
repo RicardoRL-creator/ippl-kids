@@ -2,7 +2,7 @@
 .login-background {
   position: relative;
   background-color: rgba(255, 255, 255, 0.8); /* Fundo branco transparente */
-  padding: 40px; /* Para garantir que o fundo seja maior que o container */
+  padding: 30px; /* Para garantir que o fundo seja maior que o container */
   display: flex;
   justify-content: center; /* Centraliza o conteúdo */
   align-items: center; /* Centraliza o conteúdo */
@@ -14,7 +14,6 @@
   max-width: 300px; /* Limita a largura máxima do container */
   transition: all 0.3s ease; /* Transição suave para hover */
   left: 10%;
-  width: 50%;
 }
 
 .login-container {
