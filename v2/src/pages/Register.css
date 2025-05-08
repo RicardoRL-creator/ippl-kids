@@ -20,7 +20,12 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com opacidade */
+  padding: 0px 15%; /* Adiciona espaçamento vertical e horizontal */
+  
+
 }
+
 
 .register-title {
   font-size: 24px;

@@ -1,3 +1,19 @@
+/* Adicionando uma variável CSS para ajustar o espaçamento manualmente apenas no container de login */
+:root {
+  --login-container-padding-left: 15%; /* Valor padrão ajustável */
+}
+
+/* Corrigindo o estilo para garantir que o espaçamento seja ajustável */
+.login-container {
+  display: flex;
+  justify-content: flex-start; /* Move o container para o lado esquerdo */
+  align-items: center;
+  height: 100vh;
+  padding-left: var(--login-container-padding-left, 20px); /* Usa a variável ou um valor padrão */
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com opacidade */
+  background-clip: content-box; /* Define o recorte do fundo */
+}
+
 /* Corrigindo o estilo para garantir que o espaçamento seja ajustável */
 .login-container {
   display: flex;

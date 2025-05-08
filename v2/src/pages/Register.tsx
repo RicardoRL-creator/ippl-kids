@@ -40,7 +40,7 @@ const NovoLogin = () => {
         <h1 className="register-title">Bem-vindo!</h1>
         <p className="register-subtitle">Por favor, cadastre-se para continuar</p>
         <form className="register-form" onSubmit={handleRegister}>
-          <label className="register-label">Nome Completo</label>
+          <label className="register-label">Nome completo</label>
           <input
             type="text"
             className="register-input"
@@ -67,7 +67,7 @@ const NovoLogin = () => {
             onChange={(e) => setPhone(e.target.value)}
             required
           />
-          <label className="register-label">Data de Nascimento</label>
+          <label className="register-label">Data de nascimento</label>
           <input
             type="date"
             className="register-input"
