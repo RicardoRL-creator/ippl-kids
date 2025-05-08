@@ -1,26 +1,21 @@
-/* Adicionando uma variável CSS para ajustar o espaçamento manualmente apenas no container de login */
-:root {
-  --login-container-padding-left: 15%; /* Valor padrão ajustável */
+/* Corrigindo o estilo para garantir que o espaçamento seja ajustável */
+.login-background {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco transparente */
+  display: flex;
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  z-index: 1; /* Garante que o fundo fique atrás do conteúdo */
+  overflow: hidden; /* Para evitar que o conteúdo transborde */
+  max-width: 400px; /* Limita a largura máxima do container */
+  transition: all 0.3s ease; /* Transição suave para hover */
+  left: 5%;
+  width: 100%; /* Mantém apenas uma definição de largura */
 }
 
-/* Corrigindo o estilo para garantir que o espaçamento seja ajustável */
 .login-container {
-  display: flex;
-  justify-content: flex-start; /* Move o container para o lado esquerdo */
-  align-items: center;
-  height: 100vh;
-  padding-left: var(--login-container-padding-left, 20px); /* Usa a variável ou um valor padrão */
-  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com opacidade */
-  background-clip: content-box; /* Define o recorte do fundo */
-}
-
-/* Corrigindo o estilo para garantir que o espaçamento seja ajustável */
-.login-container {
-  display: flex;
-  justify-content: flex-start; /* Move o container para o lado esquerdo */
-  align-items: center;
-  height: 100vh;
-  padding: 0px 15%; /* Adiciona espaçamento vertical e horizontal */
-  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com opacidade */
-  background-clip: content-box; /* Define o recorte do fundo */
+  position: relative;
+  z-index: 2; /* Garante que o container fique acima do fundo */
+  max-width: 500px; /* Define uma largura máxima para o container */
+  width: 100%; /* Garante que o container ocupe toda a largura disponível */
+  margin: 0 auto; /* Centraliza o container horizontalmente */
 }
