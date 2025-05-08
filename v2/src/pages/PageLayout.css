@@ -1,5 +1,6 @@
 :root {
-  /* Removida a variável --login-container-padding-left daqui */
+  --primary-color: #3498db; /* Example variable */
+  --secondary-color: #2ecc71; /* Example variable */
 }
 
 .page-layout {
@@ -39,4 +40,26 @@
   width: 100%;
   height: 100%;
   z-index: 0;
+}
+
+.login-background {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco transparente */
+  padding: 40px; /* Para garantir que o fundo seja maior que o container */
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo */
+  align-items: center; /* Centraliza o conteúdo */
+  min-height: 100%; /* Ocupa toda a altura da página */
+  z-index: 1; /* Garante que o fundo fique atrás do conteúdo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+  overflow: hidden; /* Para evitar que o conteúdo transborde */
+  max-width: 300px; /* Limita a largura máxima do container */
+  transition: all 0.3s ease; /* Transição suave para hover */
+  left: -25%;
+  width: 50%; /* Mantém apenas uma definição de largura */
+}
+
+.login-container {
+  position: relative;
+  z-index: 2; /* Para garantir que o container fique acima do fundo */
 }

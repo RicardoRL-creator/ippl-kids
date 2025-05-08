@@ -44,42 +44,44 @@ const Login = () => {
 
   return (
     <PageLayout isAuthenticated={isAuthenticated}>
-      <div className="login-container">
-        <div className="login-form-container">
-          <div className="register-container">
-            <h1 className="register-title">Bem-vindo!</h1>
-            <p className="register-subtitle">Por favor, faça login para continuar</p>
-            <form className="register-form" onSubmit={handleLogin}>
-              <label className="register-label input-container">
-                <div className="input-wrapper">
-                  <span className="icon">📧</span>
-                  <input
-                    type="email"
-                    className="register-input"
-                    placeholder="Digite seu e-mail"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-              </label>
-              <label className="register-label input-container">
-                <div className="input-wrapper">
-                  <span className="icon">🔒</span>
-                  <input
-                    type="password"
-                    className="register-input"
-                    placeholder="Digite sua senha"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-              </label>
-              <button type="submit" className="register-button same-size">Entrar</button>
-            </form>
-            {error && <p className="register-error">{error}</p>}
-            <button className="register-button same-size" onClick={() => navigate('/register')}>Novo cadastro</button>
+      <div className="login-background">
+        <div className="login-container">
+          <div className="login-form-container">
+            <div className="register-container">
+              <h1 className="register-title">Bem-vindo de volta!</h1>
+              <p className="register-subtitle">Por favor, faça login para continuar</p>
+              <form className="register-form" onSubmit={handleLogin}>
+                <label className="register-label input-container">
+                  <div className="input-wrapper">
+                    <span className="icon">📧</span>
+                    <input
+                      type="email"
+                      className="register-input"
+                      placeholder="Digite seu e-mail"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                </label>
+                <label className="register-label input-container">
+                  <div className="input-wrapper">
+                    <span className="icon">🔒</span>
+                    <input
+                      type="password"
+                      className="register-input"
+                      placeholder="Digite sua senha"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                </label>
+                <button type="submit" className="register-button same-size">Entrar</button>
+              </form>
+              {error && <p className="register-error">{error}</p>}
+              <button className="register-button same-size" onClick={() => navigate('/register')}>Novo cadastro</button>
+            </div>
           </div>
         </div>
       </div>
