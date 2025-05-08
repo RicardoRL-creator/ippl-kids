@@ -1,12 +1,19 @@
+:root {
+  /* Removida a variável --login-container-padding-left daqui */
+}
+
 .page-layout {
   position: relative;
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start; /* Alinha o conteúdo ao topo */
+  align-items: flex-start; /* Alinha o conteúdo à esquerda */
+  padding: 0px; /* Adiciona espaçamento ao redor do conteúdo */
+  padding-left: 0; /* Remove o uso da variável aqui */
   z-index: 0; /* Garante que o layout principal esteja acima do fundo */
+  
 }
 
 .logged-background {

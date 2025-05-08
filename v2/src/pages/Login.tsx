@@ -3,6 +3,7 @@ import { signIn, checkIfAccountInUse, removeSession } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid'; // Importar para gerar um deviceId único
 import './Register.css'; // Reutilizando o CSS da tela de registro
+import './Login.css'; // Importar para aplicar os estilos corretamente
 import PageLayout from './PageLayout';
 
 const Login = () => {
