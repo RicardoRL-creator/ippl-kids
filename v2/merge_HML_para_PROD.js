@@ -1,3 +1,6 @@
+// Para executar este script, use o seguinte comando no terminal:
+// node merge_HML_para_PROD.js
+
 import { exec } from 'child_process';
 
 // Função para executar comandos no terminal

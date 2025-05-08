@@ -1,5 +1,5 @@
-// Renomeando o script para um nome mais sugestivo
-// Salve este arquivo como merge_DEV_para_HML.js para refletir o novo nome.
+// Para executar este script, use o seguinte comando no terminal:
+// node merge_HML_para_PROD.js
 
 import { exec } from 'child_process';
 
