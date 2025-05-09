@@ -1,22 +1,21 @@
 import { useNavigate } from 'react-router-dom';
-import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
-import logo from '../../public/logo.png';
-
-// Este componente é a página inicial do sistema
+import './Home.css'; // Usando o estilo exclusivo de Home.css
 
 const Home = () => {
   const navigate = useNavigate();
 
+  // Adicionando a classe home-page ao body
+  document.body.className = "home-page";
+
   return (
-    <>
-      <div className="home-background"></div>
-      <div className="register-container">
-        <img src={logo} alt="Logo do SIPPLe" className="register-logo" />
-        <button className="register-button" onClick={() => navigate('/buscar')}>Localizar Paciente</button>
-        <button className="register-button" onClick={() => navigate('/cadastro')}>Cadastrar novo Paciente</button>
-        <button className="register-button" onClick={() => navigate('/relatorio')}>Relatório</button>
+    <div className="home-container">
+      <h1 className="home-title">Bem-vindo ao SIPPLe</h1>
+      <div className="home-form">
+        <button className="home-button" onClick={() => navigate('/buscar')}>Localizar Paciente</button>
+        <button className="home-button" onClick={() => navigate('/cadastro')}>Cadastrar novo Paciente</button>
+        <button className="home-button" onClick={() => navigate('/relatorio')}>Relatório</button>
       </div>
-    </>
+    </div>
   );
 };
 
