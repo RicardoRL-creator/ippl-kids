@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# para executar o script, use o comando: ./merge-dev-to-hml.sh
 # Este script faz o merge da branch DEV para a branch HML
 
 # Saia imediatamente se um comando falhar
