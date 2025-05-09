@@ -54,11 +54,13 @@
 }
 
 .buscar-input {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
   padding: 10px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
-  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -100,6 +102,8 @@
 
 .buscar-patient-options {
   /* Estilo das opções de pacientes */
+  max-height: 200px; /* Define uma altura máxima para a lista de pacientes */
+  overflow-y: auto; /* Adiciona rolagem vertical apenas na lista */
   margin-top: 20px;
 }
 

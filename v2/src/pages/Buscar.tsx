@@ -21,6 +21,7 @@ const Buscar = () => {
   const [loading, setLoading] = useState(false);
   const [patients, setPatients] = useState<Patient[]>([]);
   const [notFound, setNotFound] = useState(false);
+  const [isSearchActive, setIsSearchActive] = useState(false); // Estado para controlar o tamanho do container
   const navigate = useNavigate();
 
   // Atualiza o estado de busca com o valor inserido pelo usuário.
@@ -32,6 +33,7 @@ const Buscar = () => {
   const handleSearch = async () => {
     setLoading(true);
     setNotFound(false);
+    setIsSearchActive(true); // Ativa o estado de busca para expandir o container
 
     try {
       const { data, error } = await supabase
@@ -77,7 +79,7 @@ const Buscar = () => {
   return (
     <>
       <div className="buscar-background"></div>
-      <div className="buscar-container">
+      <div className={`buscar-container ${isSearchActive ? 'buscar-container-active' : ''}`}>
         <h1 className="buscar-title">Localizar Paciente</h1>
         <div className="buscar-section">
           <input
@@ -116,7 +118,7 @@ const Buscar = () => {
             <h2>Selecione o Paciente</h2>
             <ul>
               {patients.map((patient: Patient) => (
-                <li key={patient.id}>
+                <li key={patient.id} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   <button
                     className="buscar-button"
                     onClick={() => handleSelectPatient(patient.id)}
