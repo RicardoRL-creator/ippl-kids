@@ -9,7 +9,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1 className="home-title">Bem-vindo ao SIPPLe</h1>
+      <img src="../../public/logo.png" alt="Logo do SIPPLe" className="home-logo" />
       <div className="home-form">
         <button className="home-button" onClick={() => navigate('/buscar')}>Localizar Paciente</button>
         <button className="home-button" onClick={() => navigate('/cadastro')}>Cadastrar novo Paciente</button>
