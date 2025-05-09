@@ -48,7 +48,7 @@ const Login = () => {
         <div className="login-container">
           <div className="login-form-container">
             <div className="register-container">
-              <h1 className="register-title">Bem-vindo de volta!</h1>
+              <h1 className="register-title">Bem-vindo!</h1>
               <p className="register-subtitle">Por favor, faça login para continuar</p>
               <form className="register-form" onSubmit={handleLogin}>
                 <label className="register-label input-container">

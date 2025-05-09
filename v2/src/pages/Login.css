@@ -1,19 +1,22 @@
 /* Corrigindo o estilo para garantir que o espaçamento seja ajustável */
+/*  padding: 30px; /* Para garantir que o fundo seja maior que o container */
+/*  justify-content: center; /* Centraliza o conteúdo */
+/*  overflow: hidden; /* Para evitar que o conteúdo transborde */
+/*  transition: all 0.3s ease; /* Transição suave para hover */
+
+
 .login-background {
   position: relative;
   background-color: rgba(255, 255, 255, 0.8); /* Fundo branco transparente */
-  padding: 30px; /* Para garantir que o fundo seja maior que o container */
   display: flex;
-  justify-content: center; /* Centraliza o conteúdo */
   align-items: center; /* Centraliza o conteúdo */
   min-height: 100%; /* Ocupa toda a altura da página */
   width: 100%; /* Ocupa toda a largura da página */
   z-index: 1; /* Garante que o fundo fique atrás do conteúdo */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
-  overflow: hidden; /* Para evitar que o conteúdo transborde */
   max-width: 300px; /* Limita a largura máxima do container */
-  transition: all 0.3s ease; /* Transição suave para hover */
   left: 10%;
+  border: none; /* Remove qualquer borda existente */
 }
 
 .login-container {
