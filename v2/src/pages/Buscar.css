@@ -13,6 +13,10 @@
   z-index: -1;
 }
 
+body.buscar-background {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 .buscar-container {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 30px;
