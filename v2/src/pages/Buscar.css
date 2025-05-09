@@ -115,6 +115,14 @@
   margin-bottom: 8px; /* Adiciona mais espaço entre os itens da lista */
 }
 
+.buscar-patient-options ul li button {
+  font-size: 12px; /* Reduz o tamanho da fonte dos botões */
+  padding: 5px 10px; /* Reduz o espaçamento interno dos botões */
+  text-align: left; /* Alinha o texto à esquerda */
+  width: 100%; /* Garante que todos os botões tenham a mesma largura */
+  box-sizing: border-box; /* Inclui padding e borda no cálculo da largura */
+}
+
 .buscar-not-found {
   /* Estilo para mensagem de não encontrado */
   margin-top: 20px;
