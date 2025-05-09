@@ -1,7 +1,5 @@
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
-import { signOut, supabase } from './supabaseClient';
-import { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import Cadastro from './pages/Cadastro';
 import AplicacaoProvas from './pages/AplicacaoProvas';
@@ -14,58 +12,11 @@ import Dashboard from './pages/Dashboard'; // Exemplo de página protegida
 import NovoLogin from './pages/Register';
 import AuthRedirect from './pages/AuthRedirect';
 import Buscar from './pages/Buscar'; // Importando o componente correto
+import TopBar from './pages/TopBar'; // Importando o componente TopBar
 
 // Este é o componente principal do aplicativo
 function App() {
-  const navigate = useNavigate();
   const location = useLocation();
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [loading, setLoading] = useState(true); // Estado de carregamento
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const { data: { user }, error } = await supabase.auth.getUser();
-      if (error) {
-        console.error('Erro ao obter dados do usuário:', error);
-        setLoading(false); // Finaliza o carregamento mesmo em caso de erro
-        return;
-      }
-
-      if (user) {
-        setUserEmail(user.email || '');
-
-        // Buscar o nome do usuário na tabela profiles usando user_id
-        const { data: profile, error: profileError } = await supabase
-          .from('profiles')
-          .select('username')
-          .eq('user_id', user.id)
-          .single();
-
-        if (profileError) {
-          console.error('Erro ao obter o perfil do usuário:', profileError);
-        } else {
-          setUserName(profile?.username || 'Usuário');
-        }
-      }
-      setLoading(false); // Finaliza o carregamento após buscar os dados
-    };
-
-    fetchUserData();
-  }, []);
-
-  const handleSignOut = async () => {
-    try {
-      if (!userEmail) {
-        console.error('E-mail do usuário não encontrado.');
-        return;
-      }
-      await signOut(userEmail); // Passa o e-mail do usuário autenticado
-      navigate('/login'); // Redireciona para a página de login após o logoff
-    } catch (error) {
-      console.error('Erro ao sair:', error);
-    }
-  };
 
   return (
     <div>
@@ -75,14 +26,7 @@ function App() {
         </div>
       )}
       {location.pathname !== '/login' && location.pathname !== '/register' && (
-        <div style={{ position: 'absolute', top: 10, right: 10, display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {loading ? (
-            <span>Carregando...</span> // Exibe um texto enquanto carrega
-          ) : (
-            <span>{userName} ({userEmail})</span>
-          )}
-          <button onClick={handleSignOut}>Sair</button>
-        </div>
+        <TopBar />
       )}
       <Routes>
         {/* Rotas protegidas */}

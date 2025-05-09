@@ -78,76 +78,82 @@ const Cadastro = () => {
 
   return (
     <PageLayout isAuthenticated={isAuthenticated}>
-      <div className="register-container">
-        <h1 className="register-title">Cadastrar Paciente</h1>
+      <div className="cadastro-container">
+        <div className="top-bar">
+          <img src="../../public/logo.png" alt="Logo" className="top-bar-logo" />
+          <button className="top-bar-logout">Sair</button>
+        </div>
+        <div className="register-container">
+          <h1 className="register-title">Cadastrar Paciente</h1>
 
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-        <div className="register-section">
-          <label htmlFor="nome" className="register-label">Nome:</label>
-          <input
-            type="text"
-            id="nome"
-            className="register-input"
-            placeholder="Nome do Paciente"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          />
+          <div className="register-section">
+            <label htmlFor="nome" className="register-label">Nome:</label>
+            <input
+              type="text"
+              id="nome"
+              className="register-input"
+              placeholder="Nome do Paciente"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
 
-          <label htmlFor="cpf" className="register-label">CPF:</label>
-          <input
-            type="text"
-            id="cpf"
-            className="register-input"
-            placeholder="Somente números"
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-          />
+            <label htmlFor="cpf" className="register-label">CPF:</label>
+            <input
+              type="text"
+              id="cpf"
+              className="register-input"
+              placeholder="Somente números"
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+            />
 
-          <label htmlFor="dataNascimento" className="register-label">Data de Nascimento:</label>
-          <input
-            type="date"
-            id="dataNascimento"
-            className="register-input"
-            value={dataNascimento}
-            onChange={(e) => setDataNascimento(e.target.value)}
-          />
+            <label htmlFor="dataNascimento" className="register-label">Data de Nascimento:</label>
+            <input
+              type="date"
+              id="dataNascimento"
+              className="register-input"
+              value={dataNascimento}
+              onChange={(e) => setDataNascimento(e.target.value)}
+            />
 
-          <label htmlFor="sexo" className="register-label">Sexo:</label>
-          <select
-            id="sexo"
-            className="register-input"
-            value={sexo}
-            onChange={(e) => setSexo(e.target.value)}
-          >
-            <option value="">Selecione</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
-          </select>
+            <label htmlFor="sexo" className="register-label">Sexo:</label>
+            <select
+              id="sexo"
+              className="register-input"
+              value={sexo}
+              onChange={(e) => setSexo(e.target.value)}
+            >
+              <option value="">Selecione</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+            </select>
 
-          <label htmlFor="localNascimentoCidade" className="register-label">Cidade de Nascimento:</label>
-          <input
-            type="text"
-            id="localNascimentoCidade"
-            className="register-input"
-            placeholder="Cidade de Nascimento"
-            value={localNascimentoCidade}
-            onChange={(e) => setLocalNascimentoCidade(e.target.value)}
-          />
+            <label htmlFor="localNascimentoCidade" className="register-label">Cidade de Nascimento:</label>
+            <input
+              type="text"
+              id="localNascimentoCidade"
+              className="register-input"
+              placeholder="Cidade de Nascimento"
+              value={localNascimentoCidade}
+              onChange={(e) => setLocalNascimentoCidade(e.target.value)}
+            />
 
-          <label htmlFor="localNascimentoEstado" className="register-label">Estado de Nascimento:</label>
-          <input
-            type="text"
-            id="localNascimentoEstado"
-            className="register-input"
-            placeholder="Estado de Nascimento"
-            value={localNascimentoEstado}
-            onChange={(e) => setLocalNascimentoEstado(e.target.value)}
-          />
+            <label htmlFor="localNascimentoEstado" className="register-label">Estado de Nascimento:</label>
+            <input
+              type="text"
+              id="localNascimentoEstado"
+              className="register-input"
+              placeholder="Estado de Nascimento"
+              value={localNascimentoEstado}
+              onChange={(e) => setLocalNascimentoEstado(e.target.value)}
+            />
 
-          <div className="button-container">
-            <button className="register-button" onClick={() => navigate('/')}>Voltar</button>
-            <button className="register-button" onClick={handleCadastro}>Cadastrar</button>
+            <div className="button-container">
+              <button className="register-button" onClick={() => navigate('/')}>Voltar</button>
+              <button className="register-button" onClick={handleCadastro}>Cadastrar</button>
+            </div>
           </div>
         </div>
       </div>
