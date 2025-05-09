@@ -1,5 +1,3 @@
-import './Register.css';
-
 const Classificacao = () => {
   return (
     <div className="register-container">

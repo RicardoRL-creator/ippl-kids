@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import './Register.css';
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 import logo from '../../public/logo.png';
 

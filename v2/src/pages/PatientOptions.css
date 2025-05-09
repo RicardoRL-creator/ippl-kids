@@ -1,0 +1,42 @@
+/* Estilos relacionados à lista de pacientes */
+
+.patient-info,
+.patient-options,
+.not-found {
+  text-align: left;
+}
+
+.patient-options ul {
+  max-height: 300px; /* Limita a altura da lista */
+  overflow-y: auto; /* Adiciona rolagem vertical */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background-color: #f0f0f0; /* Muda a cor de fundo para cinza */
+  border-radius: 4px; /* Adiciona bordas arredondadas */
+  border: 1px solid #ccc; /* Adiciona uma borda cinza */
+}
+
+.patient-options ul li {
+  font-size: 14px; /* Diminui o tamanho da fonte */
+  margin: 1px 0; /* Adiciona espaçamento entre os itens */
+  padding: 1px; /* Adiciona espaçamento interno */
+}
+
+.patient-options ul li button {
+  font-size: 14px; /* Diminui o tamanho da fonte dos botões */
+  padding: 1px 20px; /* Ajusta o espaçamento interno dos botões */
+  background-color: #e0e0e0; /* Muda a cor de fundo dos botões para cinza claro */
+  border: none; /* Remove bordas dos botões */
+  border-radius: 4px; /* Adiciona bordas arredondadas aos botões */
+  cursor: pointer; /* Adiciona o cursor de ponteiro */
+  transition: background-color 0.3s; /* Adiciona uma transição suave para a mudança de cor */
+  width: 100%; /* Faz os botões ocuparem toda a largura do item da lista */
+  text-align: left; /* Alinha o texto à esquerda */
+  text-decoration: none; /* Remove o sublinhado do texto */
+  margin: 2px 0; /* Adiciona espaçamento entre os botões */
+}
+
+.patient-options ul li button:hover {
+  background-color: #d6d6d6; /* Muda a cor de fundo ao passar o mouse */
+}

@@ -1,5 +1,3 @@
-import './Register.css';
-
 const Dashboard = () => {
   return (
     <div className="register-container">
