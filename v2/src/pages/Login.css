@@ -19,7 +19,7 @@
 .login-container {
   position: relative;
   z-index: 2; /* Garante que o container fique acima do fundo */
-  max-width: 500px; /* Define uma largura máxima para o container */
+  max-width: 250px; /* Define uma largura máxima para o container */
   width: 100%; /* Garante que o container ocupe toda a largura disponível */
   margin: 0 auto; /* Centraliza o container horizontalmente */
 }
