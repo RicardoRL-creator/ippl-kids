@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# para executar o script, use o comando: ./merge-hml-to-prod.sh
 # Este script faz o merge da branch HML para a branch PRODUCAO
 
 # Saia imediatamente se um comando falhar
