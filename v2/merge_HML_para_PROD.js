@@ -21,14 +21,21 @@ function runCommand(command) {
 
 (async () => {
   try {
-    console.log('Mudando para a branch PROD...');
-    await runCommand('git checkout PROD');
+    console.log('Buscando as últimas alterações das branches remotas...');
+    await runCommand('git fetch');
 
-    console.log('Fazendo merge da branch HML para PROD...');
-    await runCommand('git merge HML');
+    console.log('Criando uma branch local temporária para o merge...');
+    await runCommand('git checkout -b temp-merge origin/PRODUCAO');
 
-    console.log('Enviando alterações para o repositório remoto...');
-    await runCommand('git push origin PROD');
+    console.log('Fazendo merge da branch remota HML para PRODUCAO...');
+    await runCommand('git merge origin/HML');
+
+    console.log('Enviando alterações para a branch remota PRODUCAO...');
+    await runCommand('git push origin temp-merge:PRODUCAO');
+
+    console.log('Removendo a branch local temporária...');
+    await runCommand('git checkout main'); // Voltar para uma branch segura
+    await runCommand('git branch -D temp-merge');
 
     console.log('Processo concluído com sucesso!');
   } catch (error) {

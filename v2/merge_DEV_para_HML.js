@@ -1,5 +1,5 @@
 // Para executar este script, use o seguinte comando no terminal:
-// node merge_HML_para_PROD.js
+// node merge_DEV_para_HML.js
 
 import { exec } from 'child_process';
 
@@ -21,14 +21,21 @@ function runCommand(command) {
 
 (async () => {
   try {
-    console.log('Mudando para a branch HML...');
-    await runCommand('git checkout HML');
+    console.log('Buscando as últimas alterações das branches remotas...');
+    await runCommand('git fetch');
 
-    console.log('Fazendo merge da branch DEV para HML...');
-    await runCommand('git merge DEV');
+    console.log('Criando uma branch local temporária para o merge...');
+    await runCommand('git checkout -b temp-merge origin/HML');
 
-    console.log('Enviando alterações para o repositório remoto...');
-    await runCommand('git push origin HML');
+    console.log('Fazendo merge da branch remota DEV para HML...');
+    await runCommand('git merge origin/DEV');
+
+    console.log('Enviando alterações para a branch remota HML...');
+    await runCommand('git push origin temp-merge:HML');
+
+    console.log('Removendo a branch local temporária...');
+    await runCommand('git checkout main'); // Voltar para uma branch segura
+    await runCommand('git branch -D temp-merge');
 
     console.log('Processo concluído com sucesso!');
   } catch (error) {
