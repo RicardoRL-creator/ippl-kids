@@ -114,21 +114,23 @@ const Buscar = () => {
         )}
 
         {patients.length > 1 && (
-          <div className="buscar-patient-options">
-            <h2>Selecione o Paciente</h2>
-            <ul>
-              {patients.map((patient: Patient) => (
-                <li key={patient.id} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  <button
-                    className="buscar-button"
-                    onClick={() => handleSelectPatient(patient.id)}
-                  >
-                    {patient.nome} - {patient.cpf}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <>
+            <h2 className="buscar-select-title">Selecione o Paciente</h2>
+            <div className="buscar-patient-options">
+              <ul>
+                {patients.map((patient: Patient) => (
+                  <li key={patient.id} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <button
+                      className="buscar-button"
+                      onClick={() => handleSelectPatient(patient.id)}
+                    >
+                      {patient.nome} - {patient.cpf}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
         )}
 
         {notFound && (
