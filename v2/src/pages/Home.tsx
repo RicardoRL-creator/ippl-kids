@@ -1,12 +1,17 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import './Home.css'; // Usando o estilo exclusivo de Home.css
 import TopBar from './TopBar';
 
 const Home = () => {
   const navigate = useNavigate();
 
-  // Adicionando a classe home-page ao body
-  document.body.className = "home-page";
+  useEffect(() => {
+    document.body.className = 'home-page';
+    return () => {
+      document.body.className = ''; // Remove a classe ao sair da página
+    };
+  }, []);
 
   return (
     <>

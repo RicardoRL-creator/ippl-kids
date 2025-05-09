@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import './Buscar.css';
@@ -23,6 +23,13 @@ const Buscar = () => {
   const [notFound, setNotFound] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false); // Estado para controlar o tamanho do container
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.className = 'buscar-background';
+    return () => {
+      document.body.className = ''; // Remove a classe ao sair da página
+    };
+  }, []);
 
   // Atualiza o estado de busca com o valor inserido pelo usuário.
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
