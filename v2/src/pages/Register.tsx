@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { signUpWithDetails, checkIfEmailExists } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import './Register.css'; // Importando o CSS para estilização
-import PageLayout from './PageLayout';
+import './AuthPages.css'; // Importando o CSS para estilização
 
 const NovoLogin = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +11,16 @@ const NovoLogin = () => {
   const [birthDate, setBirthDate] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const isAuthenticated = false; // Página não logada
+
+  // Adicionando a classe auth-page ao body
+  document.body.className = "auth-page";
+
+  const handleBirthDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/[^\d/]/g, ''); // Remove caracteres não numéricos e não barras
+    if (value.length > 2 && value[2] !== '/') value = value.slice(0, 2) + '/' + value.slice(2);
+    if (value.length > 5 && value[5] !== '/') value = value.slice(0, 5) + '/' + value.slice(5, 9); // Limita o ano a 4 dígitos
+    setBirthDate(value.slice(0, 10)); // Garante que o total não exceda 10 caracteres
+  };
 
   // Função para lidar com o registro de um novo usuário
   const handleRegister = async (e: React.FormEvent) => {
@@ -35,61 +43,56 @@ const NovoLogin = () => {
   };
 
   return (
-    <PageLayout isAuthenticated={isAuthenticated}>
-      <div className="register-container">
-        <h1 className="register-title">Bem-vindo!</h1>
-        <p className="register-subtitle">Por favor, cadastre-se para continuar</p>
-        <form className="register-form" onSubmit={handleRegister}>
-          <label className="register-label">Nome completo</label>
-          <input
-            type="text"
-            className="register-input"
-            placeholder="Digite seu nome completo"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <label className="register-label">E-mail</label>
-          <input
-            type="email"
-            className="register-input"
-            placeholder="Digite seu e-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label className="register-label">Telefone</label>
-          <input
-            type="tel"
-            className="register-input"
-            placeholder="Digite seu telefone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-          <label className="register-label">Data de nascimento</label>
-          <input
-            type="date"
-            className="register-input"
-            value={birthDate}
-            onChange={(e) => setBirthDate(e.target.value)}
-            required
-          />
-          <label className="register-label">Senha</label>
-          <input
-            type="password"
-            className="register-input"
-            placeholder="Crie uma senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit" className="register-button">Cadastrar</button>
-        </form>
-        {error && <p className="register-error">{error}</p>}
-        <button className="back-button" onClick={() => navigate(-1)}>Voltar</button>
-      </div>
-    </PageLayout>
+    <div className="auth-container">
+      <h1 className="auth-title">Novo cadastro</h1>
+      <form className="auth-form" onSubmit={handleRegister}>
+        <input
+          type="text"
+          placeholder="Nome completo"
+          className="auth-input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="E-mail"
+          className="auth-input"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Telefone"
+          className="auth-input"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          className="auth-input"
+          value={birthDate}
+          onChange={handleBirthDateChange}
+          required
+          placeholder="Data de nascimento (dd/mm/aaaa)"
+          pattern="\d{2}/\d{2}/\d{4}"
+          title="Digite a data no formato dd/mm/aaaa"
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          className="auth-input"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" className="auth-button">Cadastrar</button>
+        <button type="button" className="auth-button" onClick={() => navigate(-1)}>Voltar</button>
+      </form>
+      {error && <p className="auth-error">{error}</p>}
+    </div>
   );
 };
 

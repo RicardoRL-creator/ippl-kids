@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import './Register.css';
 import '../index.css'; // Importando o CSS global para aplicar o estilo de fundo
 
 interface Patient {

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import PageLayout from './PageLayout';
-import './Register.css';
 
 // Este componente permite cadastrar novos pacientes, gerenciando estados e formulários.
 const Cadastro = () => {

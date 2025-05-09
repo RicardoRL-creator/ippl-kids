@@ -1,5 +1,3 @@
-import './Register.css';
-
 const Resumo = () => {
   return (
     <div className="register-container">
