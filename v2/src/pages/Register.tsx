@@ -15,6 +15,13 @@ const NovoLogin = () => {
   // Adicionando a classe auth-page ao body
   document.body.className = "auth-page";
 
+  const handleBirthDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/[^\d/]/g, ''); // Remove caracteres não numéricos e não barras
+    if (value.length > 2 && value[2] !== '/') value = value.slice(0, 2) + '/' + value.slice(2);
+    if (value.length > 5 && value[5] !== '/') value = value.slice(0, 5) + '/' + value.slice(5, 9); // Limita o ano a 4 dígitos
+    setBirthDate(value.slice(0, 10)); // Garante que o total não exceda 10 caracteres
+  };
+
   // Função para lidar com o registro de um novo usuário
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +44,7 @@ const NovoLogin = () => {
 
   return (
     <div className="auth-container">
-      <h1 className="auth-title">Cadastro</h1>
+      <h1 className="auth-title">Novo cadastro</h1>
       <form className="auth-form" onSubmit={handleRegister}>
         <input
           type="text"
@@ -64,12 +71,14 @@ const NovoLogin = () => {
           required
         />
         <input
-          type="date"
-          placeholder="Data de nascimento"
+          type="text"
           className="auth-input"
           value={birthDate}
-          onChange={(e) => setBirthDate(e.target.value)}
+          onChange={handleBirthDateChange}
           required
+          placeholder="Data de nascimento (dd/mm/aaaa)"
+          pattern="\d{2}/\d{2}/\d{4}"
+          title="Digite a data no formato dd/mm/aaaa"
         />
         <input
           type="password"
