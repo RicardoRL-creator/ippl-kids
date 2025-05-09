@@ -1,4 +1,3 @@
-import './Register.css';
 import { useNavigate } from 'react-router-dom';
 
 const Relatorio = () => {

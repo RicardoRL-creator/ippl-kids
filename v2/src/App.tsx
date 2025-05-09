@@ -69,12 +69,12 @@ function App() {
 
   return (
     <div>
-      {location.pathname !== '/login' && (
+      {location.pathname !== '/login' && location.pathname !== '/register' && (
         <div style={{ position: 'absolute', top: 5, left: 10 }}>
           <img src="/public/logo.png" alt="Logo" style={{ height: '50px' }} />
         </div>
       )}
-      {location.pathname !== '/login' && (
+      {location.pathname !== '/login' && location.pathname !== '/register' && (
         <div style={{ position: 'absolute', top: 10, right: 10, display: 'flex', alignItems: 'center', gap: '10px' }}>
           {loading ? (
             <span>Carregando...</span> // Exibe um texto enquanto carrega
