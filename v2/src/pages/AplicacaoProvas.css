@@ -100,6 +100,28 @@ body.aplicacao-provas {
   color: #fff;
 }
 
+.aplicacao-provas-items.rima-items {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* maior largura para comportar botões e input */
+}
+
+.aplicacao-provas-items.rima-items .aplicacao-provas-item {
+  padding: 0px 4px; /* padding horizontal extra para espaço interno */
+  flex-wrap: nowrap; /* mantém tudo em linha na seção de rima */
+  height: auto;      /* altura dinâmica para caber input e botões */
+  min-height: 40px;  /* mantém altura mínima igual aos itens padrão */
+  gap: 2px;
+  justify-content: flex-start;
+}
+
+.aplicacao-provas-item input.resposta-input {
+  flex-shrink: 0; /* impede input de encolher */
+  margin: 0 8px;
+  width: 100px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .aplicacao-provas-navigation {
   display: flex;
   justify-content: space-between;

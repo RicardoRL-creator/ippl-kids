@@ -17,11 +17,18 @@ interface Responses {
   };
 }
 
+interface UserAnswers {
+  [sectionIndex: number]: {
+    [itemIndex: number]: string;
+  };
+}
+
 const AplicacaoProvas: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentSection, setCurrentSection] = useState<number>(0);
   const [responses, setResponses] = useState<Responses>({});
+  const [userAnswers, setUserAnswers] = useState<UserAnswers>({});
 
   const patient = location.state?.patient;
 
@@ -33,8 +40,13 @@ const AplicacaoProvas: React.FC = () => {
     },
     {
       title: 'Produção de Rima',
-      instructions: 'Fale uma palavra que rime com a palavra apresentada.',
-      items: ['Mão', 'Pão', 'Cão'],
+      instructions: 'Instrução: Fale uma palavra que termine com o mesmo fonema. Eu vou dizer uma palavra (mão) e quero que você diga outra palavra que termine igual a palavra mão. Exemplo: pão, cão.',
+      items: [
+        'Cola', 'Bala', 'Papel', 'Foguete', 'Sapo',
+        'Minhoca', 'Sabão', 'Gato', 'Cor', 'Dente',
+        'Pé', 'Castelo', 'Palha', 'Uva', 'Mamão',
+        'Mel', 'Pijama', 'Caneta', 'Vela', 'Chave'
+      ],
     },
   ];
 
@@ -42,6 +54,17 @@ const AplicacaoProvas: React.FC = () => {
     setResponses((prev) => {
       const sectionResponses = prev[sectionIndex] || {};
       const updatedSection = { ...sectionResponses, [itemIndex]: value };
+      return {
+        ...prev,
+        [sectionIndex]: updatedSection,
+      };
+    });
+  };
+
+  const handleAnswerChange = (sectionIndex: number, itemIndex: number, value: string) => {
+    setUserAnswers((prev) => {
+      const sectionAnswers = prev[sectionIndex] || {};
+      const updatedSection = { ...sectionAnswers, [itemIndex]: value };
       return {
         ...prev,
         [sectionIndex]: updatedSection,
@@ -61,6 +84,7 @@ const AplicacaoProvas: React.FC = () => {
       const { error } = await supabase.from('provas').insert({
         patient_id: patient.id,
         results: responses,
+        user_answers: userAnswers,
         created_at: new Date().toISOString(),
       });
 
@@ -104,10 +128,20 @@ const AplicacaoProvas: React.FC = () => {
               <div className="aplicacao-provas-section-container">
                 <h2>{section.title}</h2>
                 <p>{section.instructions}</p>
-                <div className="aplicacao-provas-items">
+                <div className={`aplicacao-provas-items ${index === 1 ? 'rima-items' : ''}`}>
                   {section.items.map((item, i) => (
                     <div key={i} className="aplicacao-provas-item">
                       <span>{item}</span>
+                      {index === 1 && (
+                        <input
+                          type="text"
+                          maxLength={15}
+                          className="resposta-input"
+                          placeholder="Sua resposta"
+                          value={userAnswers[index]?.[i] || ''}
+                          onChange={(e) => handleAnswerChange(index, i, e.target.value)}
+                        />
+                      )}
                       <button
                         type="button"
                         className={responses[index]?.[i] === true ? 'selected-true' : ''}
