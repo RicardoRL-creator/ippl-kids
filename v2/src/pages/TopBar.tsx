@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase, signOut } from '../supabaseClient';
 import './TopBar.css'; // Estilo exclusivo para o TopBar
@@ -53,15 +53,17 @@ const TopBar = () => {
   };
 
   return (
-    <div className="top-bar">
-      <img src="../../public/logo.png" alt="Logo" className="top-bar-logo" />
-      <div className="top-bar-user-info">
-        {loading ? (
-          <span>Carregando...</span>
-        ) : (
-          <span>{userName} ({userEmail})</span>
-        )}
-        <button className="top-bar-logout" onClick={handleSignOut}>Sair</button>
+    <div style={{ height: '60px' }}> {/* Wrapper para garantir espaçamento fixo */}
+      <div className="top-bar">
+        <img src="../../public/logo.png" alt="Logo" className="top-bar-logo" />
+        <div className="top-bar-user-info">
+          {loading ? (
+            <span>Carregando...</span>
+          ) : (
+            <span>{userName} ({userEmail})</span>
+          )}
+          <button className="top-bar-logout" onClick={handleSignOut}>Sair</button>
+        </div>
       </div>
     </div>
   );
