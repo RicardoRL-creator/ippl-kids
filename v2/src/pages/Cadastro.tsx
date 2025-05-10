@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import PageLayout from './PageLayout';
+import './Cadastro.css';
 
 // Este componente permite cadastrar novos pacientes, gerenciando estados e formulários.
 const Cadastro = () => {
@@ -13,12 +13,30 @@ const Cadastro = () => {
   const [localNascimentoEstado, setLocalNascimentoEstado] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  const isAuthenticated = false; // Página não logada
+
+  useEffect(() => {
+    document.body.classList.add('cadastro-page');
+    return () => {
+      document.body.classList.remove('cadastro-page');
+    };
+  }, []);
 
   // Função para validar CPF
   // Verifica se o CPF contém exatamente 11 dígitos.
   const isValidCPF = (cpf: string) => {
     return /^\d{11}$/.test(cpf);
+  };
+
+  const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    setCpf(value.slice(0, 11)); // Limita a entrada a 11 dígitos
+  };
+
+  const handleDataNascimentoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/[^\d/]/g, ''); // Remove caracteres não numéricos e não barras
+    if (value.length > 2 && value[2] !== '/') value = value.slice(0, 2) + '/' + value.slice(2);
+    if (value.length > 5 && value[5] !== '/') value = value.slice(0, 5) + '/' + value.slice(5, 9); // Limita o ano a 4 dígitos
+    setDataNascimento(value.slice(0, 10)); // Garante que o total não exceda 10 caracteres
   };
 
   // Função para cadastrar um novo paciente no Supabase
@@ -77,87 +95,83 @@ const Cadastro = () => {
   };
 
   return (
-    <PageLayout isAuthenticated={isAuthenticated}>
+    <div className="cadastro-page">
       <div className="cadastro-container">
-        <div className="top-bar">
-          <img src="../../public/logo.png" alt="Logo" className="top-bar-logo" />
-          <button className="top-bar-logout">Sair</button>
+        <div className="cadastro-top-bar">
+          {/* Botão 'Sair' removido */}
         </div>
-        <div className="register-container">
-          <h1 className="register-title">Cadastrar Paciente</h1>
+        <div className="cadastro-register-container">
+          <h1 className="cadastro-title">Cadastrar Paciente</h1>
 
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {errorMessage && <p className="cadastro-error-message">{errorMessage}</p>}
 
-          <div className="register-section">
-            <label htmlFor="nome" className="register-label">Nome:</label>
+          <div className="cadastro-register-section">
             <input
               type="text"
               id="nome"
-              className="register-input"
+              className="cadastro-input"
               placeholder="Nome do Paciente"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
             />
 
-            <label htmlFor="cpf" className="register-label">CPF:</label>
             <input
               type="text"
               id="cpf"
-              className="register-input"
-              placeholder="Somente números"
+              className="cadastro-input"
+              placeholder="CPF (Somente números)"
               value={cpf}
-              onChange={(e) => setCpf(e.target.value)}
+              onChange={handleCpfChange}
             />
 
-            <label htmlFor="dataNascimento" className="register-label">Data de Nascimento:</label>
             <input
-              type="date"
+              type="text"
               id="dataNascimento"
-              className="register-input"
+              className="cadastro-input"
               value={dataNascimento}
-              onChange={(e) => setDataNascimento(e.target.value)}
+              onChange={handleDataNascimentoChange}
+              placeholder="Data de nascimento (dd/mm/aaaa)"
+              pattern="\d{2}/\d{2}/\d{4}"
+              title="Digite a data no formato dd/mm/aaaa"
             />
 
-            <label htmlFor="sexo" className="register-label">Sexo:</label>
             <select
               id="sexo"
-              className="register-input"
+              className="cadastro-input"
               value={sexo}
               onChange={(e) => setSexo(e.target.value)}
             >
-              <option value="">Selecione</option>
+              <option value="">Sexo (selecione)</option>
               <option value="Masculino">Masculino</option>
               <option value="Feminino">Feminino</option>
             </select>
 
-            <label htmlFor="localNascimentoCidade" className="register-label">Cidade de Nascimento:</label>
             <input
               type="text"
               id="localNascimentoCidade"
-              className="register-input"
+              className="cadastro-input"
               placeholder="Cidade de Nascimento"
               value={localNascimentoCidade}
               onChange={(e) => setLocalNascimentoCidade(e.target.value)}
             />
 
-            <label htmlFor="localNascimentoEstado" className="register-label">Estado de Nascimento:</label>
             <input
               type="text"
               id="localNascimentoEstado"
-              className="register-input"
+              className="cadastro-input"
               placeholder="Estado de Nascimento"
               value={localNascimentoEstado}
               onChange={(e) => setLocalNascimentoEstado(e.target.value)}
             />
 
-            <div className="button-container">
-              <button className="register-button" onClick={() => navigate('/')}>Voltar</button>
-              <button className="register-button" onClick={handleCadastro}>Cadastrar</button>
+            <div className="cadastro-button-container">
+              <button className="cadastro-button" onClick={() => navigate('/')}>Voltar</button>
+              <button className="cadastro-button" onClick={handleCadastro}>Cadastrar</button>
             </div>
           </div>
         </div>
       </div>
-    </PageLayout>
+    </div>
   );
 };
 

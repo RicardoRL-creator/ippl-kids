@@ -1,19 +1,23 @@
-/* Estilos exclusivos para a página Home */
+/* Estilos específicos para a página de Cadastro */
 
-body.home-page {
+body.cadastro-page {
   margin: 40;
   padding: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('../public/fundo.png') no-repeat center center fixed;
+  background: url('/fundo.png') no-repeat center center fixed;
   background-size: cover;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
-.home-container {
+.cadastro-container {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 30px;
   border-radius: 8px;
@@ -28,26 +32,34 @@ body.home-page {
   z-index: 1;
 }
 
-.home-title {
+.cadastro-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-.home-form {
+.cadastro-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.home-input {
+.cadastro-input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  width: 100%; /* Garante que todas as caixas tenham o mesmo tamanho */
+  box-sizing: border-box; /* Inclui padding e borda no tamanho total */
+  margin-bottom: 5px; /* Adiciona espaçamento uniforme entre as caixas */
 }
 
-.home-button {
+.cadastro-button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cadastro-button {
   padding: 10px;
   border: none;
   border-radius: 4px;
@@ -58,12 +70,12 @@ body.home-page {
   transition: background-color 0.3s;
 }
 
-.home-button:hover {
+.cadastro-button:hover {
   background-color: #0056b3;
 }
 
-.home-logo {
-  width: 250px; /* Reduzindo o tamanho da imagem */
-  height: auto;
-  margin-bottom: 0px; /* Espaço entre a imagem e o título */
+.cadastro-register-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Espaçamento uniforme entre os elementos */
 }

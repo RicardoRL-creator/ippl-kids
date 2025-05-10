@@ -1,5 +1,9 @@
 /* Estilos exclusivos para o componente TopBar */
 
+body {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 .top-bar {
   display: flex;
   justify-content: space-between;
