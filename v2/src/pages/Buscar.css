@@ -15,6 +15,7 @@
 
 body.buscar-background {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  overflow: hidden; /* remove barras de rolagem */
 }
 
 .buscar-container {
