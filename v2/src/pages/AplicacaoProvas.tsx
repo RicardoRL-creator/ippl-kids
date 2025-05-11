@@ -17,31 +17,52 @@ interface Responses {
   };
 }
 
+interface UserAnswers {
+  [sectionIndex: number]: {
+    [itemIndex: number]: string;
+  };
+}
+
 const AplicacaoProvas: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentSection, setCurrentSection] = useState<number>(0);
   const [responses, setResponses] = useState<Responses>({});
+  const [userAnswers, setUserAnswers] = useState<UserAnswers>({});
 
   const patient = location.state?.patient;
 
   const sections: Section[] = [
-    {
-      title: 'Conhecimento do Alfabeto',
-      instructions: '',
-      items: Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)),
-    },
-    {
-      title: 'Produção de Rima',
-      instructions: 'Fale uma palavra que rime com a palavra apresentada.',
-      items: ['Mão', 'Pão', 'Cão'],
-    },
+    { title: 'Conhecimento do Alfabeto', instructions: '', items: Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)) },
+    { title: 'Produção de Rima', instructions: '', items: ['Cola', 'Bala', 'Papel', 'Foguete', 'Sapo', 'Minhoca', 'Sabão', 'Gato', 'Cor', 'Dente', 'Pé', 'Castelo', 'Palha', 'Uva', 'Mamão', 'Mel', 'Pijama', 'Caneta', 'Vela', 'Chave'] },
+    { title: 'Identificação de Rima', instructions: 'Identifique se as palavras rimam.', items: ['Mão - Pão', 'Cão - Pão'] },
+    { title: 'Segmentação Silábica', instructions: 'Separe em sílabas.', items: ['Banana', 'Abacaxi'] },
+    { title: 'Produção de Palavras a partir do Fonema', instructions: 'Forme uma palavra começando com o fonema dado.', items: ['M', 'P'] },
+    { title: 'Síntese Fonêmica', instructions: 'Combine fonemas para formar palavra.', items: ['C + A + S + A', 'P + Ã + O'] },
+    { title: 'Análise Fonêmica', instructions: 'Separe a palavra em fonemas.', items: ['Gato', 'Sapato'] },
+    { title: 'Identificação de Fonema Inicial', instructions: 'Diga o primeiro fonema da palavra.', items: ['Abelha', 'Livro'] },
+    { title: 'Memória Operacional Fonológica', instructions: '', items: [] },
+    { title: 'Nomeação Automática Rápida', instructions: '', items: [] },
+    { title: 'Leitura Silenciosa', instructions: '', items: [] },
+    { title: 'Leitura de Palavras e Pseudopalavras', instructions: '', items: [] },
+    { title: 'Compreensão auditiva de sentenças a partir de figuras', instructions: '', items: [] },
   ];
 
   const handleResponseChange = (sectionIndex: number, itemIndex: number, value: boolean) => {
     setResponses((prev) => {
       const sectionResponses = prev[sectionIndex] || {};
       const updatedSection = { ...sectionResponses, [itemIndex]: value };
+      return {
+        ...prev,
+        [sectionIndex]: updatedSection,
+      };
+    });
+  };
+
+  const handleAnswerChange = (sectionIndex: number, itemIndex: number, value: string) => {
+    setUserAnswers((prev) => {
+      const sectionAnswers = prev[sectionIndex] || {};
+      const updatedSection = { ...sectionAnswers, [itemIndex]: value };
       return {
         ...prev,
         [sectionIndex]: updatedSection,
@@ -61,6 +82,7 @@ const AplicacaoProvas: React.FC = () => {
       const { error } = await supabase.from('provas').insert({
         patient_id: patient.id,
         results: responses,
+        user_answers: userAnswers,
         created_at: new Date().toISOString(),
       });
 
@@ -102,12 +124,37 @@ const AplicacaoProvas: React.FC = () => {
           currentSection === index && (
             <div key={index} className="aplicacao-provas-section">
               <div className="aplicacao-provas-section-container">
-                <h2>{section.title}</h2>
+                <h2>{section.title}
+                  {index === 0 && (
+                    <span className="tooltip-icon" tabIndex={0}>
+                      ℹ
+                      <span className="tooltip-text">
+                        Instrução: Vamos nomear as letras do alfabeto? Fale o nome de cada uma dessas.
+                      </span>
+                    </span>
+                  )}
+                  {index === 1 && (
+                    <span className="tooltip-icon" tabIndex={0}>
+                      ℹ
+                      <span className="tooltip-text">Instrução: Fale uma palavra que termine com o mesmo fonema. Eu vou dizer uma palavra (mão) e quero que você diga outra palavra que termine igual a palavra mão. Exemplo: pão, cão.</span>
+                    </span>
+                  )}
+                </h2>
                 <p>{section.instructions}</p>
-                <div className="aplicacao-provas-items">
+                <div className={`aplicacao-provas-items ${index === 1 ? 'rima-items' : ''}`}>
                   {section.items.map((item, i) => (
                     <div key={i} className="aplicacao-provas-item">
                       <span>{item}</span>
+                      {index === 1 && (
+                        <input
+                          type="text"
+                          maxLength={15}
+                          className="resposta-input"
+                          placeholder="Sua resposta"
+                          value={userAnswers[index]?.[i] || ''}
+                          onChange={(e) => handleAnswerChange(index, i, e.target.value)}
+                        />
+                      )}
                       <button
                         type="button"
                         className={responses[index]?.[i] === true ? 'selected-true' : ''}
@@ -122,6 +169,11 @@ const AplicacaoProvas: React.FC = () => {
                   ))}
                 </div>
                 <div className="aplicacao-provas-navigation">
+                  {index === 0 && (
+                    <button type="button" className="voltar-home-button" onClick={() => navigate('/') }>
+                      Voltar para Home
+                    </button>
+                  )}
                   {index > 0 && (
                     <button onClick={() => setCurrentSection(index - 1)}>Voltar</button>
                   )}
@@ -131,8 +183,11 @@ const AplicacaoProvas: React.FC = () => {
                     </button>
                   )}
                   {index === sections.length - 1 && (
-                    <button onClick={saveResults} disabled={!isSectionComplete(index)}>
-                      Finalizar
+                    <button
+                      onClick={() => navigate('/dados-complementares', { state: { patient, responses, userAnswers } })}
+                      disabled={!isSectionComplete(index)}
+                    >
+                      Próxima
                     </button>
                   )}
                 </div>
