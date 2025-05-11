@@ -147,3 +147,42 @@ button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.tooltip-icon {
+  display: inline-block;
+  position: relative;
+  margin-left: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 14px;
+}
+
+.tooltip-icon .tooltip-text {
+  visibility: hidden;
+  width: 220px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  text-align: left;
+  padding: 8px;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.tooltip-icon:hover .tooltip-text,
+.tooltip-icon:focus .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}

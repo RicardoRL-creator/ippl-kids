@@ -40,7 +40,7 @@ const AplicacaoProvas: React.FC = () => {
     },
     {
       title: 'Produção de Rima',
-      instructions: 'Instrução: Fale uma palavra que termine com o mesmo fonema. Eu vou dizer uma palavra (mão) e quero que você diga outra palavra que termine igual a palavra mão. Exemplo: pão, cão.',
+      instructions: '',
       items: [
         'Cola', 'Bala', 'Papel', 'Foguete', 'Sapo',
         'Minhoca', 'Sabão', 'Gato', 'Cor', 'Dente',
@@ -126,7 +126,14 @@ const AplicacaoProvas: React.FC = () => {
           currentSection === index && (
             <div key={index} className="aplicacao-provas-section">
               <div className="aplicacao-provas-section-container">
-                <h2>{section.title}</h2>
+                <h2>{section.title}
+                  {index === 1 && (
+                    <span className="tooltip-icon" tabIndex={0}>
+                      ℹ
+                      <span className="tooltip-text">Instrução: Fale uma palavra que termine com o mesmo fonema. Eu vou dizer uma palavra (mão) e quero que você diga outra palavra que termine igual a palavra mão. Exemplo: pão, cão.</span>
+                    </span>
+                  )}
+                </h2>
                 <p>{section.instructions}</p>
                 <div className={`aplicacao-provas-items ${index === 1 ? 'rima-items' : ''}`}>
                   {section.items.map((item, i) => (
