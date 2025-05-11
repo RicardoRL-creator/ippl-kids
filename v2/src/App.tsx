@@ -12,6 +12,7 @@ import NovoLogin from './pages/Register';
 import AuthRedirect from './pages/AuthRedirect';
 import Buscar from './pages/Buscar'; // Importando o componente correto
 import TopBar from './pages/TopBar'; // Importando o componente TopBar
+import DadosComplementares from './pages/DadosComplementares';
 
 // Este é o componente principal do aplicativo
 function App() {
@@ -82,6 +83,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Relatorio />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dados-complementares"
+          element={
+            <ProtectedRoute>
+              <DadosComplementares />
             </ProtectedRoute>
           }
         />

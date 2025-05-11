@@ -33,21 +33,19 @@ const AplicacaoProvas: React.FC = () => {
   const patient = location.state?.patient;
 
   const sections: Section[] = [
-    {
-      title: 'Conhecimento do Alfabeto',
-      instructions: '',
-      items: Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)),
-    },
-    {
-      title: 'Produção de Rima',
-      instructions: '',
-      items: [
-        'Cola', 'Bala', 'Papel', 'Foguete', 'Sapo',
-        'Minhoca', 'Sabão', 'Gato', 'Cor', 'Dente',
-        'Pé', 'Castelo', 'Palha', 'Uva', 'Mamão',
-        'Mel', 'Pijama', 'Caneta', 'Vela', 'Chave'
-      ],
-    },
+    { title: 'Conhecimento do Alfabeto', instructions: '', items: Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)) },
+    { title: 'Produção de Rima', instructions: '', items: ['Cola', 'Bala', 'Papel', 'Foguete', 'Sapo', 'Minhoca', 'Sabão', 'Gato', 'Cor', 'Dente', 'Pé', 'Castelo', 'Palha', 'Uva', 'Mamão', 'Mel', 'Pijama', 'Caneta', 'Vela', 'Chave'] },
+    { title: 'Identificação de Rima', instructions: 'Identifique se as palavras rimam.', items: ['Mão - Pão', 'Cão - Pão'] },
+    { title: 'Segmentação Silábica', instructions: 'Separe em sílabas.', items: ['Banana', 'Abacaxi'] },
+    { title: 'Produção de Palavras a partir do Fonema', instructions: 'Forme uma palavra começando com o fonema dado.', items: ['M', 'P'] },
+    { title: 'Síntese Fonêmica', instructions: 'Combine fonemas para formar palavra.', items: ['C + A + S + A', 'P + Ã + O'] },
+    { title: 'Análise Fonêmica', instructions: 'Separe a palavra em fonemas.', items: ['Gato', 'Sapato'] },
+    { title: 'Identificação de Fonema Inicial', instructions: 'Diga o primeiro fonema da palavra.', items: ['Abelha', 'Livro'] },
+    { title: 'Memória Operacional Fonológica', instructions: '', items: [] },
+    { title: 'Nomeação Automática Rápida', instructions: '', items: [] },
+    { title: 'Leitura Silenciosa', instructions: '', items: [] },
+    { title: 'Leitura de Palavras e Pseudopalavras', instructions: '', items: [] },
+    { title: 'Compreensão auditiva de sentenças a partir de figuras', instructions: '', items: [] },
   ];
 
   const handleResponseChange = (sectionIndex: number, itemIndex: number, value: boolean) => {
@@ -185,8 +183,11 @@ const AplicacaoProvas: React.FC = () => {
                     </button>
                   )}
                   {index === sections.length - 1 && (
-                    <button onClick={saveResults} disabled={!isSectionComplete(index)}>
-                      Finalizar
+                    <button
+                      onClick={() => navigate('/dados-complementares', { state: { patient, responses, userAnswers } })}
+                      disabled={!isSectionComplete(index)}
+                    >
+                      Próxima
                     </button>
                   )}
                 </div>
