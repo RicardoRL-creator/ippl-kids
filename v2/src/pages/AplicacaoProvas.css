@@ -28,8 +28,8 @@ body.aplicacao-provas {
 }
 
 .aplicacao-provas-patient-container {
-  margin-bottom: 20px;
-  padding: 15px;
+  margin-bottom: 8px;  /* diminui espaço abaixo */
+  padding: 6px;        /* reduz padding interno */
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
@@ -40,6 +40,10 @@ body.aplicacao-provas {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+}
+
+.aplicacao-provas-patient-info p {
+  margin: 4px 0; /* reduz margin vertical entre linhas */
 }
 
 .aplicacao-provas-section-container {

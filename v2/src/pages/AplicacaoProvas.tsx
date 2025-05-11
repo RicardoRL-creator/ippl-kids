@@ -127,6 +127,14 @@ const AplicacaoProvas: React.FC = () => {
             <div key={index} className="aplicacao-provas-section">
               <div className="aplicacao-provas-section-container">
                 <h2>{section.title}
+                  {index === 0 && (
+                    <span className="tooltip-icon" tabIndex={0}>
+                      ℹ
+                      <span className="tooltip-text">
+                        Instrução: Vamos nomear as letras do alfabeto? Fale o nome de cada uma dessas.
+                      </span>
+                    </span>
+                  )}
                   {index === 1 && (
                     <span className="tooltip-icon" tabIndex={0}>
                       ℹ
