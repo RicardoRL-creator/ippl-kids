@@ -6,7 +6,7 @@ body.dados-complementares {
 
 .dados-complementares-container {
   max-width: 600px;
-  margin: 40px auto;
+  margin: 0px auto;
   padding: 20px;
   background-color: rgba(255,255,255,0.95);
   border-radius: 8px;
@@ -19,6 +19,37 @@ body.dados-complementares {
 
 .dados-form {
   margin-top: 20px;
+}
+
+/* Alinhar label e input de data na mesma linha */
+.dados-form .form-group:first-of-type {
+  display: flex;
+  align-items: center;
+}
+.dados-form .form-group:first-of-type label {
+  margin-bottom: 0;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+.dados-form .form-group:first-of-type input[type="date"] {
+  flex: 1;
+}
+
+/* Alinhar label e input de Curso/Série e Escola/Instituição na mesma linha */
+.dados-form .form-group:nth-of-type(3),
+.dados-form .form-group:nth-of-type(4) {
+  display: flex;
+  align-items: center;
+}
+.dados-form .form-group:nth-of-type(3) label,
+.dados-form .form-group:nth-of-type(4) label {
+  margin-bottom: 0;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+.dados-form .form-group:nth-of-type(3) input[type="text"],
+.dados-form .form-group:nth-of-type(4) input[type="text"] {
+  flex: 1;
 }
 
 .form-group {
