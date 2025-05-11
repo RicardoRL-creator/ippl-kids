@@ -73,8 +73,20 @@ const DadosComplementares: React.FC = () => {
       alert('Erro ao salvar os dados.');
     } else {
       alert('Dados salvos com sucesso.');
-      // opcional: navegar para outra página
-      navigate('/');
+      // Navegar para resumo com dados de prova
+      navigate('/resumo', {
+        state: {
+          patient,
+          responses,
+          userAnswers,
+          applicationDate,
+          testType,
+          course,
+          institution,
+          ageString,
+          applicant
+        }
+      });
     }
   };
 
