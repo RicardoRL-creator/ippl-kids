@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { supabase } from '../supabaseClient';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import './AplicacaoProvas.css';
@@ -26,11 +25,11 @@ interface UserAnswers {
 const AplicacaoProvas: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [currentSection, setCurrentSection] = useState<number>(0);
-  const [responses, setResponses] = useState<Responses>({});
-  const [userAnswers, setUserAnswers] = useState<UserAnswers>({});
-
-  const patient = location.state?.patient;
+  // Restaurar estado ao voltar de Dados Complementares
+  const { patient, responses: prevResponses, userAnswers: prevUserAnswers, initialSection } = (location.state as any) || {};
+  const [currentSection, setCurrentSection] = useState<number>(initialSection || 0);
+  const [responses, setResponses] = useState<Responses>(prevResponses || {});
+  const [userAnswers, setUserAnswers] = useState<UserAnswers>(prevUserAnswers || {});
 
   const sections: Section[] = [
     { title: 'Conhecimento do Alfabeto', instructions: '', items: Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)) },
@@ -75,29 +74,7 @@ const AplicacaoProvas: React.FC = () => {
     return sections[sectionIndex].items.every((_, i) => sectionResponses[i] !== undefined);
   };
 
-  const saveResults = async () => {
-    if (!patient) return;
-
-    try {
-      const { error } = await supabase.from('provas').insert({
-        patient_id: patient.id,
-        results: responses,
-        user_answers: userAnswers,
-        created_at: new Date().toISOString(),
-      });
-
-      if (error) {
-        console.error('Erro ao salvar resultados:', error);
-        alert('Erro ao salvar resultados. Tente novamente.');
-      } else {
-        alert('Resultados salvos com sucesso!');
-        navigate('/');
-      }
-    } catch (err) {
-      console.error('Erro inesperado:', err);
-      alert('Erro inesperado ao salvar resultados.');
-    }
-  };
+  // Removido: função saveResults não utilizada
 
   useEffect(() => {
     document.body.classList.add('aplicacao-provas');
@@ -184,7 +161,7 @@ const AplicacaoProvas: React.FC = () => {
                   )}
                   {index === sections.length - 1 && (
                     <button
-                      onClick={() => navigate('/dados-complementares', { state: { patient, responses, userAnswers } })}
+                      onClick={() => navigate('/dados-complementares', { state: { patient, responses, userAnswers, fromSection: index } })}
                       disabled={!isSectionComplete(index)}
                     >
                       Próxima

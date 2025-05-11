@@ -1,0 +1,64 @@
+/* CSS para a página Resumo */
+
+/* Fundo e espaçamento para página Resumo */
+body.resumo {
+  background: url('/fundo.png') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+body.resumo .resumo-container {
+  margin-top: 0px;
+}
+
+.resumo-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.resumo-content {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-block {
+  margin-bottom: 20px;
+}
+
+.info-block h2 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.info-block p {
+  margin: 4px 0;
+}
+
+.chart-container {
+  margin: 30px 0;
+}
+
+.legend {
+  margin-top: 20px;
+}
+
+.legend h2 {
+  margin-bottom: 10px;
+}
+
+.legend p {
+  margin: 2px 0;
+}
+
+.exported-chart {
+  margin-top: 30px;
+}
+
+.exported-chart img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
