@@ -171,6 +171,11 @@ const AplicacaoProvas: React.FC = () => {
                   ))}
                 </div>
                 <div className="aplicacao-provas-navigation">
+                  {index === 0 && (
+                    <button type="button" className="voltar-home-button" onClick={() => navigate('/') }>
+                      Voltar para Home
+                    </button>
+                  )}
                   {index > 0 && (
                     <button onClick={() => setCurrentSection(index - 1)}>Voltar</button>
                   )}
