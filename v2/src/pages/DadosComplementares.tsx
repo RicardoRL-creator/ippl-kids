@@ -53,6 +53,31 @@ const DadosComplementares: React.FC = () => {
     };
   }, []);
 
+  // Submissão do formulário: salvar no Supabase
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!patient) return;
+    // Inserir na tabela 'provas'
+    const payload = {
+      patient_id: patient.id || patient.cpf,
+      application_date: applicationDate,
+      test_type: testType,
+      course,
+      institution,
+      responses,
+      user_answers: userAnswers,
+    };
+    const { error } = await supabase.from('provas').insert([payload]);
+    if (error) {
+      console.error('Erro ao salvar prova:', error);
+      alert('Erro ao salvar os dados.');
+    } else {
+      alert('Dados salvos com sucesso.');
+      // opcional: navegar para outra página
+      navigate('/');
+    }
+  };
+
   if (!patient) return <p>Dados do paciente não disponíveis.</p>;
 
   return (
@@ -66,7 +91,7 @@ const DadosComplementares: React.FC = () => {
         <p><strong>Idade:</strong> {ageString || '-'}</p>
         <p><strong>Aplicador:</strong> {applicant}</p>
       </div>
-      <form className="dados-form">
+      <form className="dados-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Data da Aplicação da prova:</label>
           <input type="date" value={applicationDate} onChange={e => setApplicationDate(e.target.value)} />
