@@ -37,23 +37,8 @@ const Resumo: React.FC = () => {
     applicant
   } = (location.state as any) || {};
 
-  // Acrônimos e descrições das seções
+  // Acrônimos das seções
   const acronyms = ['CA','PR','IR','SS','PPf','SF','AF','IFI','MOF','RAN','LS','LPPP','CAF'];
-  const descriptions = [
-    'Conhecimento do alfabeto',
-    'Produção de rima',
-    'Identificação de rima',
-    'Segmentação silábica',
-    'Produção de palavras a partir do fonema',
-    'Síntese fonêmica',
-    'Análise fonêmica',
-    'Identificação de fonema inicial',
-    'Memória operacional fonológica',
-    'Nomeação automática rápida',
-    'Leitura silenciosa',
-    'Leitura de palavras e não palavras',
-    'Compreensão auditiva de sentenças a partir de figuras'
-  ];
 
   // Cálculo das pontuações
   const scores = acronyms.map((_, idx) => {
@@ -94,8 +79,6 @@ const Resumo: React.FC = () => {
           <h2>Dados do Paciente</h2>
           <p><strong>Nome:</strong> {patient?.nome}</p>
           <p><strong>Data de Nascimento:</strong> {patient?.data_nascimento && format(new Date(patient.data_nascimento), 'dd/MM/yyyy', { locale: ptBR })}</p>
-          <p><strong>Idade:</strong> {ageString}</p>
-          <p><strong>Aplicador:</strong> {applicant}</p>
         </div>
         <div className="info-block">
           <h2>Dados da Aplicação</h2>
@@ -103,21 +86,53 @@ const Resumo: React.FC = () => {
           <p><strong>Testagem:</strong> {testType}</p>
           <p><strong>Curso/Série:</strong> {course}</p>
           <p><strong>Instituição:</strong> {institution}</p>
+          <p><strong>Idade:</strong> {ageString}</p>
+          <p><strong>Aplicador:</strong> {applicant}</p>
         </div>
         <div className="chart-container">
-          <Bar data={data} options={options} />
-        </div>
-        <div className="legend">
-          <span className="tooltip-icon" tabIndex={0}>
+          {/* Tabela de resumo antes do gráfico */}
+          <div className="table-container">
+            <table className="summary-table">
+              <thead>
+                <tr>
+                  <th>Nº</th>
+                  <th>PROVAS</th>
+                  <th>TOTAL DE ACERTOS</th>
+                  <th>CLASSIFICAÇÃO</th>
+                </tr>
+              </thead>
+              <tbody>
+                {acronyms.map((ac, i) => (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{ac}</td>
+                    <td>{scores[i]}</td>
+                    <td>{/* classificação */}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {/* Ícone de informação acima do gráfico, alinhado à direita */}
+          <span className="tooltip-icon chart-info-icon" tabIndex={0}>
             ℹ
             <span className="tooltip-text">
-              {acronyms.map((ac, i) => (
-                <React.Fragment key={i}>
-                  <strong>{ac}</strong> = {descriptions[i]}<br />
-                </React.Fragment>
-              ))}
+              CA (Conhecimento do alfabeto)<br />
+              PR (Produção de rima)<br />
+              IR (Identificação de rima)<br />
+              SS (Segmentação silábica)<br />
+              PPf (Produção de palavras a partir do fonema dado)<br />
+              SF (Síntese fonêmica)<br />
+              AF (Análise fonêmica)<br />
+              IFI (Identificação de fonema inicial)<br />
+              MOF (Memória operacional fonológica)<br />
+              RAN (Nomeação automática rápida)<br />
+              LS (Leitura Silenciosa)<br />
+              LPPP (Leitura de palavras e não palavras)<br />
+              CAF (Compreensão auditiva de sentenças a partir de figuras)
             </span>
           </span>
+          <Bar data={data} options={options} />
         </div>
       </div>
     </div>
