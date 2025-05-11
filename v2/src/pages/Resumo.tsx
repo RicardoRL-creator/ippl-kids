@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import TopBar from './TopBar';
@@ -24,6 +24,8 @@ const Resumo: React.FC = () => {
     document.body.classList.add('resumo');
     return () => document.body.classList.remove('resumo');
   }, []);
+
+  const navigate = useNavigate();
 
   const location = useLocation();
   const {
@@ -72,9 +74,12 @@ const Resumo: React.FC = () => {
   return (
     <div className="resumo-container">
       <TopBar />
+      <div className="resumo-actions">
+        <button className="pdf-button" onClick={() => window.print()}>Gerar PDF</button>
+        <button className="voltar-home-button" onClick={() => navigate('/')}>Voltar para Home</button>
+      </div>
       <div className="resumo-content">
         <h1>Resumo da Prova</h1>
-        <button className="pdf-button" onClick={() => window.print()}>Gerar PDF</button>
         <div className="info-block">
           <h2>Dados do Paciente</h2>
           <p><strong>Nome:</strong> {patient?.nome}</p>

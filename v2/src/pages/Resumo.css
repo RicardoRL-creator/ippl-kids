@@ -5,6 +5,7 @@ body.resumo {
   background: url('/fundo.png') no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
+  padding-top: 20px; /* Reduz espaço do TopBar */
 }
 
 body.resumo .resumo-container {
@@ -124,4 +125,12 @@ body.resumo .resumo-container {
   left: auto;
   right: 0;
   transform: translateX(0);
+}
+
+/* Container de ações no Resumo */
+.resumo-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 10px 20px;
 }
