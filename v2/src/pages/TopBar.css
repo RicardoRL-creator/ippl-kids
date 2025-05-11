@@ -2,6 +2,7 @@
 
 body {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding-top: 60px; /* Garantindo que o conteúdo abaixo respeite a altura do TopBar */
 }
 
 .top-bar {
@@ -18,6 +19,7 @@ body {
   z-index: 1000; /* Garantir que o TopBar fique acima de outros elementos */
   box-sizing: border-box; /* Inclui padding e border no tamanho total */
   overflow: hidden; /* Garante que o conteúdo não ultrapasse os limites */
+  height: 60px; /* Definindo uma altura fixa para o TopBar */
 }
 
 .top-bar-logo {
